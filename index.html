@@ -87,6 +87,53 @@
     .ticks i.hot{background:var(--hot)}
     .strip-foot{display:flex;justify-content:space-between;margin-top:12px;font:11px var(--mono);letter-spacing:.1em;color:var(--faint)}
 
+    /* hero two-column + product dashboard (main visual) */
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:5vw;align-items:center;width:100%}
+    .hero-copy{max-width:560px}
+    .hero-copy .lead{opacity:0;animation:fadeUp .8s .5s forwards}
+    .hero-copy .readout{text-align:left;margin-top:22px;opacity:0;animation:fadeUp .8s .62s forwards}
+    .hero-cta{margin-top:28px;opacity:0;animation:fadeUp .8s .74s forwards}
+    .hero-visual{opacity:0;animation:fadeUp .9s .55s forwards}
+    .panel{border:1px solid var(--rule);border-radius:10px;background:#FCFBF8;box-shadow:0 24px 60px rgba(20,20,22,.09),0 2px 6px rgba(20,20,22,.04);overflow:hidden}
+    .p-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--rule-2);font:11px var(--mono);letter-spacing:.06em;color:var(--ink-2)}
+    .p-bar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hot);margin-right:7px;vertical-align:middle;animation:blink 2s ease-in-out infinite}
+    .p-live{color:var(--hot);letter-spacing:.14em}
+    .p-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule-2)}
+    .p-tabs button{border:0;border-right:1px solid var(--rule-2);background:none;padding:11px 6px;font:600 10.5px var(--mono);letter-spacing:.03em;color:var(--faint);cursor:pointer;transition:.2s}
+    .p-tabs button:last-child{border-right:0}
+    .p-tabs button:hover{color:var(--ink-2)}
+    .p-tabs button.on{color:var(--ink);box-shadow:inset 0 -2px var(--hot)}
+    .p-main{display:grid;grid-template-columns:.82fr 1.18fr;gap:16px;padding:18px 16px}
+    .p-fig .p-big{font:700 34px/1 var(--mono);color:var(--ink);letter-spacing:-.03em}
+    .p-fig .p-big s{font-size:16px;text-decoration:none;color:var(--hot)}
+    .p-fig .p-delta{font:11px var(--mono);color:var(--ink-2);margin:8px 0 4px}
+    .p-fig small{font:9px var(--mono);letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+    .p-chart{width:100%;height:92px;align-self:end}
+    .p-chart .grid line{stroke:var(--rule-2);stroke-width:1}
+    #pArea{fill:rgba(20,20,22,.06)}
+    #pLine{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+    .p-nodes{padding:2px 16px 16px}
+    .p-nodes .p-l{display:block;font:9px var(--mono);letter-spacing:.1em;color:var(--faint);text-transform:uppercase;margin-bottom:9px}
+    .panel .ticks{height:36px;gap:2px}
+    .p-tiles{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule-2)}
+    .p-tiles div{padding:13px 8px;text-align:center;border-right:1px solid var(--rule-2)}
+    .p-tiles div:last-child{border-right:0}
+    .p-tiles b{display:block;font:700 15px var(--mono);color:var(--ink);letter-spacing:-.01em}
+    .p-tiles span{font:8px var(--mono);letter-spacing:.12em;color:var(--faint)}
+
+    /* agent workflow diagram */
+    .flow-diagram{margin-top:8px}
+    .fd-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-radius:8px;background:#FCFBF8}
+    .fd-node{position:relative;padding:26px 22px;border-right:1px solid var(--rule)}
+    .fd-node:last-child{border-right:0}
+    .fd-node.hot{background:#FBF1EE}
+    .fd-node:not(:last-child):after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);z-index:2;color:var(--hot);font:13px var(--mono);width:18px;text-align:center;background:#FCFBF8}
+    .fd-node.hot:not(:last-child):after,.fd-node.hot+.fd-node:not(:last-child):before{background:#FBF1EE}
+    .fd-k{font:600 11px var(--mono);letter-spacing:.1em;color:var(--faint)}
+    .fd-node b{display:block;font-size:17px;font-weight:400;margin:10px 0 8px;color:var(--ink)}
+    .fd-node.hot b{color:var(--hot)}
+    .fd-d{font:12px/1.55 var(--mono);color:var(--ink-2)}
+
     /* ecosystem */
     .eco{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
     .eco .wrap{display:flex;align-items:center;gap:16px 40px;padding:20px 0;flex-wrap:wrap}
@@ -196,7 +243,12 @@
       .step{border-right:0;border-bottom:1px solid var(--rule);padding:26px 0}.step:last-child{border-bottom:0}
       .res{gap:36px}
       .foot{grid-template-columns:1fr 1fr}.foot .brand{grid-column:1/-1}
-      .hero-sub{flex-direction:column;align-items:flex-start}.readout{text-align:left}
+      .hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{max-width:none}
+      .p-main{grid-template-columns:1fr;gap:6px}.p-chart{height:80px}
+      .fd-row{grid-template-columns:1fr}
+      .fd-node{border-right:0;border-bottom:1px solid var(--rule)}.fd-node:last-child{border-bottom:0}
+      .fd-node:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-9px;transform:translateX(-50%)}
+      .fd-node.hot:not(:last-child):after{background:#FBF1EE}
     }
     @media(max-width:560px){
       .wrap{width:min(100% - 34px,var(--max))}
@@ -208,7 +260,7 @@
       *{animation:none!important;scroll-behavior:auto}
       html{scroll-snap-type:none}
       .rv{opacity:1;transform:none;filter:none;transition:none}
-      .hero .kicker,.hero .word,.hero-sub .lead,.readout{opacity:1;transform:none;animation:none}
+      .hero .kicker,.hero .word,.hero .lead,.hero .readout,.hero-cta,.hero-visual{opacity:1;transform:none;animation:none}
       .ticks i{transition:none;transform:scaleY(1)}
     }
   </style>
@@ -230,25 +282,32 @@
 
 <main id="top">
   <!-- HERO -->
-  <section class="hero"><div class="wrap">
-    <span class="kicker" data-zh="AI 基础设施工程 · 宁波" data-en="AI Infrastructure Engineering · Ningbo">AI 基础设施工程 · 宁波</span>
-    <h1><span class="word" style="animation-delay:.12s" data-zh="把每一张卡，" data-en="Turn every GPU">把每一张卡，</span><br><span class="word" style="animation-delay:.26s" data-zh="变成<em>可计价</em>的产能。" data-en="into <em>billable</em> capacity.">变成<em>可计价</em>的产能。</span></h1>
-    <div class="hero-sub">
+  <section class="hero"><div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="kicker" data-zh="AI 基础设施工程 · 宁波" data-en="AI Infrastructure Engineering · Ningbo">AI 基础设施工程 · 宁波</span>
+      <h1><span class="word" style="animation-delay:.12s" data-zh="把每一张卡，" data-en="Turn every GPU">把每一张卡，</span><br><span class="word" style="animation-delay:.26s" data-zh="变成<em>可计价</em>的产能。" data-en="into <em>billable</em> capacity.">变成<em>可计价</em>的产能。</span></h1>
       <p class="lead" data-zh="我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。" data-en="We engineer the layer between inference engines and cluster schedulers — turning compute into an operable resource. We don't resell compute; we release efficiency.">我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。</p>
       <div class="readout">
         <span data-zh="集群利用率" data-en="Utilization">集群利用率</span> <b>40 <span class="h">→</span> 72%</b><br>
         <span data-zh="作业排队" data-en="Queue">作业排队</span> <b>6h <span class="h">→</span> 20min</b>
       </div>
+      <a class="link hero-cta" href="#contact" data-zh="预约效率诊断 <span class='a'>→</span>" data-en="Book an assessment <span class='a'>→</span>">预约效率诊断 <span class="a">→</span></a>
     </div>
-
-    <!-- SIGNATURE: utilization strip -->
-    <div class="strip" aria-hidden="true">
-      <div class="strip-top">
-        <span data-zh="集群占用 · 每一格代表一张卡" data-en="Cluster occupancy · each tick is one GPU">集群占用 · 每一格代表一张卡</span>
-        <span class="live"><i></i> <span data-zh="实时" data-en="Live">实时</span></span>
+    <div class="hero-visual">
+      <div class="panel">
+        <div class="p-bar"><span><i class="dot"></i> 深言速舟 · SCHEDULER</span><span class="p-live">LIVE</span></div>
+        <div class="p-tabs">
+          <button class="on" data-u="72" data-d="40 → 72% · SLA HELD" data-s="38,42,40,48,52,55,60,64,62,70,72" data-h=".72" data-zh="混合负载" data-en="Mixed">混合负载</button>
+          <button data-u="58" data-d="P99 −36% · TOKEN +41%" data-s="30,34,33,40,44,50,54,52,56,57,58" data-h=".58" data-zh="在线推理" data-en="Online">在线推理</button>
+          <button data-u="91" data-d="QUEUE 6h → 20min" data-s="55,60,64,70,74,80,84,86,88,90,91" data-h=".91" data-zh="批量任务" data-en="Batch">批量任务</button>
+        </div>
+        <div class="p-main">
+          <div class="p-fig"><div class="p-big"><b id="pUtil">72</b><s>%</s></div><div class="p-delta" id="pDelta">40 → 72% · SLA HELD</div><small data-zh="集群利用率 · 近 24h" data-en="Utilization · 24h">集群利用率 · 近 24h</small></div>
+          <svg class="p-chart" viewBox="0 0 300 96" preserveAspectRatio="none"><g class="grid"><line x1="0" y1="24" x2="300" y2="24"/><line x1="0" y1="48" x2="300" y2="48"/><line x1="0" y1="72" x2="300" y2="72"/></g><path id="pArea" d=""></path><path id="pLine" d=""></path></svg>
+        </div>
+        <div class="p-nodes"><span class="p-l" data-zh="GPU ×48 · 实时占用" data-en="GPU ×48 · live">GPU ×48 · 实时占用</span><div class="ticks" id="ticks"></div></div>
+        <div class="p-tiles"><div><b id="pT">72%</b><span>UTIL</span></div><div><b>20m</b><span>QUEUE</span></div><div><b>99.9%</b><span>SLA</span></div></div>
       </div>
-      <div class="ticks" id="ticks"></div>
-      <div class="strip-foot"><span>IDLE</span><span>MIXED WORKLOAD · SLA HELD</span><span>UTILIZED</span></div>
     </div>
   </div></section>
 
@@ -305,6 +364,23 @@
       <h3 class="serif" data-zh="AI 智能体与业务落地" data-en="AI agents & automation">AI 智能体与业务落地</h3>
       <p data-zh="把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。" data-en="Connect LLMs to real business processes — domain agents for manufacturing and enterprise: knowledge Q&A, document workflows, process automation and system integration.">把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。</p>
       <ul><li>RAG & knowledge base</li><li>Workflow & tool orchestration</li><li>Enterprise system integration</li></ul>
+    </div>
+  </div></section>
+
+  <!-- AGENT -->
+  <section class="sec" id="agent"><div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker" data-zh="AI 智能体" data-en="AI Agents">AI 智能体</span>
+      <h2 data-zh="让大模型，真正在业务里干活。" data-en="Put the model to work inside the business.">让大模型，真正在业务里干活。</h2>
+      <p class="lead" data-zh="不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。" data-en="Not another chatbox — business agents wired into knowledge bases, tools and enterprise systems for real manufacturing and public-sector workflows; private and auditable.">不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。</p>
+    </div>
+    <div class="flow-diagram rv">
+      <div class="fd-row">
+        <div class="fd-node"><span class="fd-k">01</span><b class="serif" data-zh="业务触发" data-en="Trigger">业务触发</b><span class="fd-d" data-zh="用户 / 业务系统 / 事件" data-en="User / system / event">用户 / 业务系统 / 事件</span></div>
+        <div class="fd-node hot"><span class="fd-k">02</span><b class="serif" data-zh="Agent 编排" data-en="Orchestration">Agent 编排</b><span class="fd-d" data-zh="任务规划 · 调度知识与工具" data-en="Plan · route knowledge & tools">任务规划 · 调度知识与工具</span></div>
+        <div class="fd-node"><span class="fd-k">03</span><b class="serif" data-zh="推理 · 检索 · 调用" data-en="Reason · retrieve · act">推理 · 检索 · 调用</b><span class="fd-d" data-zh="大模型 · 知识库 RAG · 工具/系统" data-en="LLM · RAG · tools / systems">大模型 · 知识库 RAG · 工具/系统</span></div>
+        <div class="fd-node"><span class="fd-k">04</span><b class="serif" data-zh="回写业务" data-en="Write back">回写业务</b><span class="fd-d" data-zh="结果落到系统 · 全程可审计" data-en="Results into systems · fully auditable">结果落到系统 · 全程可审计</span></div>
+      </div>
     </div>
   </div></section>
 
@@ -452,19 +528,31 @@
   // reveal any .rv that live outside a snapped section (none by default, defensive)
   var strayObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});},{threshold:.15});
   document.querySelectorAll('main>*:not(section) .rv').forEach(function(el){strayObs.observe(el);});
-  // signature strip: 48 GPU ticks, ~72% utilized, hot frontier
+  // hero scheduler dashboard: tabs drive chart + readout + GPU node strip
   (function(){
     var box=document.getElementById('ticks'); if(!box) return;
-    var N=48, busy=Math.round(N*0.72), s=7;
-    function rnd(){s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;}
-    var h='';
-    for(var i=0;i<N;i++){
-      var on=i<busy, ht=on?(52+rnd()*48):(14+rnd()*16), cls=on?'busy':'';
-      if(i===busy-1)cls='hot';
-      h+='<i class="'+cls+'" style="height:'+ht.toFixed(0)+'%;transition-delay:'+(i*13)+'ms"></i>';
+    var tabs=document.querySelector('.p-tabs'),
+        line=document.getElementById('pLine'),area=document.getElementById('pArea'),
+        pUtil=document.getElementById('pUtil'),pT=document.getElementById('pT'),pDelta=document.getElementById('pDelta');
+    var seed=7; function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+    function ticks(base){
+      var N=48,busy=Math.round(N*base),h='';
+      for(var i=0;i<N;i++){var on=i<busy,ht=on?(46+rnd()*54):(12+rnd()*16),cls=on?'busy':'';if(i===busy-1)cls='hot';
+        h+='<i class="'+cls+'" style="height:'+ht.toFixed(0)+'%;transition-delay:'+(i*10)+'ms"></i>';}
+      box.innerHTML=h;box.classList.remove('on');
+      requestAnimationFrame(function(){requestAnimationFrame(function(){box.classList.add('on');});});
     }
-    box.innerHTML=h;
-    requestAnimationFrame(function(){requestAnimationFrame(function(){box.classList.add('on');});});
+    function chart(series){
+      var p=series.split(',').map(Number),n=p.length,step=300/(n-1);
+      var d=p.map(function(v,i){return (i?'L':'M')+(i*step).toFixed(1)+' '+(96-v/100*88).toFixed(1);}).join(' ');
+      if(line)line.setAttribute('d',d); if(area)area.setAttribute('d',d+' L300 96 L0 96 Z');
+    }
+    function countTo(el,to,pct){if(!el)return;var from=parseInt(el.textContent,10)||0,t0=0;
+      function s(ts){t0||(t0=ts);var k=Math.min(1,(ts-t0)/600),val=Math.round(from+(to-from)*k);el.textContent=pct?val+'%':val;if(k<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+    function apply(b){seed=7;chart(b.dataset.s);countTo(pUtil,+b.dataset.u,false);countTo(pT,+b.dataset.u,true);if(pDelta)pDelta.textContent=b.dataset.d;ticks(parseFloat(b.dataset.h));}
+    if(tabs){tabs.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      tabs.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');apply(b);});}
+    apply((tabs&&tabs.querySelector('button.on'))||(tabs&&tabs.querySelector('button')));
   })();
 </script>
 </body>
