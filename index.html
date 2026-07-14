@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <title>深言速舟｜AI 基础设施工程 · GPU 调度与推理优化</title>
-  <meta name="description" content="深言速舟专注 GPU 集群调度、大模型推理优化与企业 AI 平台交付，把每一张卡变成可计价的产能。">
+  <meta name="description" content="深言速舟专注 GPU 集群调度、大模型推理优化、企业 AI 平台与智能体交付，把每一张卡变成可计价的产能。">
   <link rel="icon" href="assets/shenyan-logo.png">
   <style>
     :root{
@@ -190,6 +190,67 @@
     .cta-box .placeholder{color:#8290AE;font:12px var(--mono);border-top:1px solid rgba(255,255,255,.12);padding-top:14px}
     .btn.light{background:#fff;color:var(--ink)}.btn.light:hover{box-shadow:0 14px 34px rgba(0,0,0,.3)}
 
+    /* Web-product rhythm: continuous, denser, and deliberately non-slide-like */
+    main>section:not(.hero){border-top:1px solid var(--line-soft)}
+    section{padding:78px 0}
+    .sec-head{margin-bottom:28px}
+    .hero{min-height:720px;display:flex;align-items:center;padding:122px 0 58px;background:linear-gradient(180deg,#fff 0%,#FBFCFF 100%)}
+    .hero-grid{grid-template-columns:minmax(0,1fr) minmax(430px,.82fr);gap:7vw}
+    .hero h1{max-width:780px;font-size:clamp(48px,5.8vw,78px)}
+    .console{border-radius:10px;box-shadow:0 30px 90px rgba(26,38,74,.12);padding:0;overflow:hidden}
+    .console-top{padding:14px 18px;background:#F8F9FC}
+    .mode-switch{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line-soft)}
+    .mode-switch button{border:0;border-right:1px solid var(--line-soft);background:#fff;padding:11px 8px;color:var(--muted);font:600 10px var(--mono);letter-spacing:.06em;cursor:pointer}
+    .mode-switch button:last-child{border:0}.mode-switch button.active{color:var(--accent-ink);background:var(--tint);box-shadow:inset 0 -2px var(--accent)}
+    .gauge{padding:8px 22px 0}.layers-mini{margin:0 22px 22px}
+    .ecosystem{background:#fff}.eco-inner{padding:18px 0}.eco-logos{gap:10px 24px}.eco-logos span{font-size:12px}
+
+    /* compact audience index instead of presentation cards */
+    .aud-grid{gap:0;margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .aud{border:0;border-right:1px solid var(--line);border-radius:0;padding:24px 28px;box-shadow:none;background:transparent}
+    .aud:last-child{border-right:0}.aud:hover{box-shadow:none;background:#F8F9FE;border-color:var(--line)}
+    .aud .goal{border:0;padding-top:2px}.aud p{min-height:48px}
+
+    /* services read as one engineering capability system */
+    #services{background:#fff}
+    #services .sec-head{display:grid;grid-template-columns:minmax(280px,.75fr) 1.25fr;column-gap:80px;align-items:end;max-width:none}
+    #services .sec-head .eyebrow{grid-column:1}#services .sec-head h2{grid-column:1;margin-bottom:0}
+    #services .sec-head .lead{grid-column:2;grid-row:1/3;padding-bottom:5px}
+    .service-grid{display:block;margin-top:36px;border-top:1px solid var(--ink)}
+    .card{display:grid;grid-template-columns:100px 74px minmax(220px,.72fr) 1fr;align-items:start;gap:22px;padding:30px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;overflow:visible;background:transparent}
+    .card:hover{transform:none;box-shadow:none;border-color:var(--line);background:linear-gradient(90deg,transparent,#FAFAFF,transparent)}
+    .card .index{padding-top:8px}.card .icon{margin:0;width:44px;height:44px;border-radius:8px}.card h3{font-size:20px;padding-top:7px}.card>p{padding-top:5px;max-width:450px}
+    .card ul{margin:0;border:0;padding-left:10px}.card li{padding:8px 0}
+
+    /* product documentation sections */
+    #technology{background:#F8F9FC}.layers{border-radius:8px;box-shadow:none}.layer{padding:20px 24px}.chips{margin-top:18px}
+    #results{background:#fff}.cmp{border-radius:8px;box-shadow:none}.cmp tr:hover td{background:#FAFAFF}
+    .flow{gap:0;border-top:1px solid var(--line);margin-top:30px}.fstep{border:0;border-right:1px solid var(--line);border-radius:0;box-shadow:none;padding:28px}.fstep:first-child{padding-left:0}.fstep:last-child{border:0}.fstep:not(:last-child):after{display:none}
+    .disciplines{gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}.discipline{border:0;border-right:1px solid var(--line);border-radius:0;background:#fff;padding:16px 20px}.discipline:last-child{border:0}
+    .team-panel{border:0;border-radius:0;background:transparent;padding:14px 0;overflow:visible}.team-panel:before{display:none}.team-grid{grid-template-columns:1fr 1fr;gap:9vw}.credentials{align-content:flex-start}.credential{border-radius:6px;background:#F8F9FC}
+    #contact{padding-top:0!important;border-top:0}.cta-band{border-radius:0;padding:64px 7vw;margin-left:calc((100vw - min(var(--max),calc(100vw - 48px)))/-2);margin-right:calc((100vw - min(var(--max),calc(100vw - 48px)))/-2)}.cta-box{border-radius:8px}
+
+    /* hero dashboard (product visual) */
+    .dash{padding:14px 16px 16px}
+    .dash-main{position:relative;border:1px solid var(--line-soft);border-radius:8px;padding:12px 14px 6px;background:linear-gradient(180deg,#fff,#FBFCFF);margin-bottom:10px}
+    .dash-figs .big{font:700 30px/1 var(--mono);color:var(--ink);letter-spacing:-.03em}
+    .dash-figs .big s{font-size:15px;text-decoration:none;color:var(--accent);margin-left:2px}
+    .dash-figs .delta{font:12px var(--mono);color:var(--accent-3);margin-top:4px}
+    .dash-figs small{display:block;font:9.5px var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+    .chart{width:100%;height:88px;display:block;margin-top:8px}
+    .chart g line{stroke:#EEF1F7;stroke-width:1}
+    .heat{margin-bottom:10px}
+    .heat-l{display:block;font:9.5px var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
+    .heat-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
+    .heat-grid i{aspect-ratio:1;border-radius:3px;background:#EAEDF6;display:block}
+    .heat-grid i.l1{background:#E4E7F6}.heat-grid i.l2{background:#BEC3F0}.heat-grid i.l3{background:#8E93E6}.heat-grid i.l4{background:var(--accent)}
+    .heat-grid i.live{animation:cell 2.6s ease-in-out infinite}
+    @keyframes cell{0%,100%{opacity:1}50%{opacity:.45}}
+    .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .tile{border:1px solid var(--line-soft);border-radius:8px;padding:10px 8px;text-align:center;background:#fff}
+    .tile b{display:block;font:700 17px var(--mono);color:var(--ink);letter-spacing:-.01em}
+    .tile span{font:9px var(--mono);letter-spacing:.1em;color:var(--muted)}
+
     /* footer */
     footer{background:var(--bg-2);border-top:1px solid var(--line);padding:64px 0 30px}
     .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
@@ -207,6 +268,7 @@
       .flow{gap:14px}.fstep:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-13px;transform:translateX(-50%)}
       .layer{grid-template-columns:74px 1fr}.layer p{grid-column:2}
       .team-panel{padding:40px 28px}.cta-band{padding:40px 28px}
+      #services .sec-head{display:block}.card{grid-template-columns:70px 54px 1fr}.card>p,.card ul{grid-column:3}.hero-grid{grid-template-columns:1fr}
       .foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}
     }
     @media(max-width:600px){
@@ -214,6 +276,7 @@
       section{padding:70px 0}.hero{padding:120px 0 66px}
       .hero-actions .btn{flex:1;justify-content:center}
       .team-panel,.cta-band{padding:32px 22px}.brand small{display:none}
+      .aud-grid{display:block}.aud{border-right:0;border-bottom:1px solid var(--line)}.aud:last-child{border-bottom:0}.aud p{min-height:0}.card{grid-template-columns:52px 1fr;gap:14px}.card .icon{grid-column:1;grid-row:2}.card h3{grid-column:2}.card>p,.card ul{grid-column:2}.flow{display:block}.fstep{border-right:0;border-bottom:1px solid var(--line);padding-left:0}.disciplines{display:block}.discipline{border-right:0;border-bottom:1px solid var(--line)}
       .foot-grid{grid-template-columns:1fr}.foot-bottom{flex-direction:column}
       .cmp{font-size:14px}.cmp td,.cmp thead th{padding:14px 16px}
     }
@@ -254,19 +317,19 @@
       </div>
 
       <div class="console reveal" aria-hidden="true">
-        <div class="console-top"><span><span class="dot"></span>CLUSTER · CONTROL PLANE</span><span data-zh="实时" data-en="LIVE">实时</span></div>
-        <div class="gauge">
-          <div class="ring"><b>72<s>%</s></b></div>
-          <div class="gauge-meta">
-            <small data-zh="集群利用率" data-en="UTILIZATION">集群利用率</small>
-            <div class="delta">40% → 72%+ · SLA HELD</div>
-            <p data-zh="训练 / 批量推理 / 在线推理，同集群混跑。" data-en="Training / batch / online inference, one cluster.">训练 / 批量推理 / 在线推理，同集群混跑。</p>
-          </div>
+        <div class="console-top"><span><span class="dot"></span>深言速舟 · SCHEDULER CONSOLE</span><span data-zh="实时" data-en="LIVE">实时</span></div>
+        <div class="mode-switch">
+          <button class="active" data-util="72" data-delta="40% → 72%+ · SLA HELD" data-series="38,42,40,48,52,55,60,64,62,70,72" data-heat=".72" data-zh="混合负载" data-en="MIXED LOAD">混合负载</button>
+          <button data-util="58" data-delta="P99 -36% · TOKEN +41%" data-series="30,34,33,40,44,50,54,52,56,57,58" data-heat=".58" data-zh="在线推理" data-en="INFERENCE">在线推理</button>
+          <button data-util="91" data-delta="QUEUE 6h → 20min" data-series="55,60,64,70,74,80,84,86,88,90,91" data-heat=".91" data-zh="批量任务" data-en="BATCH JOBS">批量任务</button>
         </div>
-        <div class="layers-mini">
-          <div class="lrow" style="--w:88%"><span class="tag">L03</span><span class="nm">INFERENCE</span><span class="bar"><i></i></span></div>
-          <div class="lrow" style="--w:72%"><span class="tag">L02</span><span class="nm">SCHEDULING</span><span class="bar"><i></i></span></div>
-          <div class="lrow" style="--w:64%"><span class="tag">L01</span><span class="nm">COMPUTE</span><span class="bar"><i></i></span></div>
+        <div class="dash">
+          <div class="dash-main">
+            <div class="dash-figs"><div class="big"><b id="cUtil">72</b><s>%</s></div><div class="delta" id="cDelta">40% → 72%+ · SLA HELD</div><small data-zh="集群利用率 · 近 24 小时" data-en="UTILIZATION · LAST 24H">集群利用率 · 近 24 小时</small></div>
+            <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B5BD6" stop-opacity=".24"/><stop offset="1" stop-color="#5B5BD6" stop-opacity="0"/></linearGradient></defs><g><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="60" x2="320" y2="60"/><line x1="0" y1="90" x2="320" y2="90"/></g><path id="cArea" fill="url(#cg)" d=""></path><path id="cLine" fill="none" stroke="#5B5BD6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d=""></path></svg>
+          </div>
+          <div class="heat"><span class="heat-l" data-zh="GPU 节点 · 实时占用" data-en="GPU NODES · LIVE">GPU 节点 · 实时占用</span><div class="heat-grid" id="cHeat"></div></div>
+          <div class="tiles"><div class="tile"><b id="tUtil">72%</b><span>UTIL</span></div><div class="tile"><b>20m</b><span>QUEUE</span></div><div class="tile"><b>99.9%</b><span>SLA</span></div></div>
         </div>
       </div>
     </div>
@@ -310,14 +373,15 @@
   <section id="services" class="tech-band">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="eyebrow" data-zh="三条服务线" data-en="THREE SERVICE LINES">三条服务线</div>
-        <h2 data-zh="从底层资源到上层业务，贯穿 AI 生产链路。" data-en="From infrastructure to outcomes, across the AI production stack.">从底层资源到上层业务，贯穿 AI 生产链路。</h2>
-        <p class="lead" data-zh="不是标准化软件售卖，而是针对真实负载、真实集群与真实交付环境的工程服务。" data-en="Not off-the-shelf software—engineering for real workloads, real clusters and real deployment environments.">不是标准化软件售卖，而是针对真实负载、真实集群与真实交付环境的工程服务。</p>
+        <div class="eyebrow" data-zh="四条服务线" data-en="FOUR SERVICE LINES">四条服务线</div>
+        <h2 data-zh="从算力调度到业务智能体，贯穿 AI 生产链路。" data-en="From GPU scheduling to business agents, across the AI production stack.">从算力调度到业务智能体，贯穿 AI 生产链路。</h2>
+        <p class="lead" data-zh="不是标准化软件售卖，而是针对真实负载、真实集群与真实交付环境的工程服务——向下治理算力，向上把大模型接入业务。" data-en="Not off-the-shelf software—engineering for real workloads, clusters and delivery environments: governing compute below, connecting LLMs to the business above.">不是标准化软件售卖，而是针对真实负载、真实集群与真实交付环境的工程服务——向下治理算力，向上把大模型接入业务。</p>
       </div>
       <div class="service-grid">
         <article class="card reveal"><span class="index">SERVICE / 01</span><div class="icon">∑</div><h3 data-zh="算力调度与利用率提升" data-en="Scheduling & Utilization">算力调度与利用率提升</h3><p data-zh="把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。" data-en="Turn fragmented compute into an operable pool across training, batch and online inference.">把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。</p><ul><li>SLA-aware scheduling</li><li>Multi-tenant governance</li><li>Elastic reclaim & backfill</li></ul></article>
         <article class="card reveal"><span class="index">SERVICE / 02</span><div class="icon">λ</div><h3 data-zh="大模型推理部署与优化" data-en="LLM Inference Optimization">大模型推理部署与优化</h3><p data-zh="基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。" data-en="Optimize large-scale MoE and multi-GPU deployments across unit cost and tail latency.">基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。</p><ul><li>Engine & kernel tuning</li><li>Multi-GPU topology</li><li>Token economics</li></ul></article>
-        <article class="card reveal"><span class="index">SERVICE / 03</span><div class="icon">AI</div><h3 data-zh="企业 AI 平台与智能体交付" data-en="Enterprise AI Platforms & Agents">企业 AI 平台与智能体交付</h3><p data-zh="面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。" data-en="Private, governable AI platforms and agents for enterprise, public sector and manufacturing.">面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。</p><ul><li>Air-gapped deployment</li><li>Domestic-stack ready</li><li>Model-to-cluster delivery</li></ul></article>
+        <article class="card reveal"><span class="index">SERVICE / 03</span><div class="icon">▤</div><h3 data-zh="企业 AI 平台（私有化）" data-en="Enterprise AI Platform">企业 AI 平台（私有化）</h3><p data-zh="面向政企与制造业，交付离线、信创兼容、可治理的私有化大模型平台底座。" data-en="A private, air-gapped, domestic-stack-compatible LLM platform foundation for enterprise, public sector and manufacturing.">面向政企与制造业，交付离线、信创兼容、可治理的私有化大模型平台底座。</p><ul><li>Air-gapped deployment</li><li>Domestic-stack ready</li><li>Access & audit governance</li></ul></article>
+        <article class="card reveal"><span class="index">SERVICE / 04</span><div class="icon">⟳</div><h3 data-zh="AI 智能体与业务落地" data-en="AI Agents & Automation">AI 智能体与业务落地</h3><p data-zh="把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。" data-en="Connect LLMs to real business processes—domain agents for manufacturing and enterprise: knowledge Q&A, document workflows, process automation and system integration.">把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。</p><ul><li>RAG & knowledge base</li><li>Workflow & tool orchestration</li><li>Enterprise system integration</li></ul></article>
       </div>
     </div>
   </section>
@@ -426,13 +490,14 @@
   <div class="foot-grid">
     <div class="foot-brand">
       <a class="brand" href="#top"><img src="assets/shenyan-logo.png" alt="深言速舟标志"><span data-zh="深言速舟<small>SHENYAN SUZHOU</small>" data-en="SHENYAN SUZHOU<small>AI INFRASTRUCTURE</small>">深言速舟<small>SHENYAN SUZHOU</small></span></a>
-      <p data-zh="轻资产 AI 基础设施服务：GPU 集群调度、大模型推理优化与企业 AI 平台交付。" data-en="Capital-light AI infrastructure: GPU cluster scheduling, LLM inference optimization and enterprise AI platform delivery.">轻资产 AI 基础设施服务：GPU 集群调度、大模型推理优化与企业 AI 平台交付。</p>
+      <p data-zh="轻资产 AI 基础设施服务：GPU 集群调度、大模型推理优化、企业 AI 平台与智能体交付。" data-en="Capital-light AI infrastructure: GPU cluster scheduling, LLM inference optimization, enterprise AI platforms and agents.">轻资产 AI 基础设施服务：GPU 集群调度、大模型推理优化、企业 AI 平台与智能体交付。</p>
     </div>
     <div class="foot-col">
       <h4 data-zh="解决方案" data-en="Solutions">解决方案</h4>
       <a href="#services" data-zh="算力调度" data-en="Scheduling">算力调度</a>
       <a href="#services" data-zh="推理优化" data-en="Inference">推理优化</a>
       <a href="#services" data-zh="企业 AI 平台" data-en="AI Platform">企业 AI 平台</a>
+      <a href="#services" data-zh="AI 智能体" data-en="AI Agents">AI 智能体</a>
       <a href="#technology" data-zh="技术架构" data-en="Architecture">技术架构</a>
     </div>
     <div class="foot-col">
@@ -466,6 +531,41 @@
   addEventListener('scroll',function(){hdr.classList.toggle('scrolled',scrollY>10);},{passive:true});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  (function(){
+    var sw=document.querySelector('.mode-switch'); if(!sw) return;
+    var line=document.getElementById('cLine'),area=document.getElementById('cArea'),
+        cUtil=document.getElementById('cUtil'),tUtil=document.getElementById('tUtil'),
+        cDelta=document.getElementById('cDelta'),heat=document.getElementById('cHeat');
+    var rnd=(function(s){return function(){s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};})(97);
+    function build(series){
+      var p=series.split(',').map(Number),n=p.length,step=320/(n-1);
+      var d=p.map(function(v,i){return (i?'L':'M')+(i*step).toFixed(1)+' '+(120-v/100*112).toFixed(1);}).join(' ');
+      return {line:d,area:d+' L320 120 L0 120 Z'};
+    }
+    function heatmap(base){
+      var h='';
+      for(var i=0;i<28;i++){
+        var v=Math.max(.05,Math.min(1,base+(rnd()-.5)*.55)),lv=v>.8?4:v>.6?3:v>.35?2:1,
+            live=rnd()<.16?' live':'';
+        h+='<i class="l'+lv+live+'" style="animation-delay:'+(rnd()*2.4).toFixed(1)+'s"></i>';
+      }
+      heat.innerHTML=h;
+    }
+    function countTo(el,to,pct){
+      if(!el)return; var from=parseInt(el.textContent,10)||0,t0=0;
+      function step(ts){t0||(t0=ts);var k=Math.min(1,(ts-t0)/550),val=Math.round(from+(to-from)*k);
+        el.textContent=pct?val+'%':val; if(k<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    }
+    function apply(b){
+      var g=build(b.dataset.series); line.setAttribute('d',g.line); area.setAttribute('d',g.area);
+      cDelta.textContent=b.dataset.delta; countTo(cUtil,+b.dataset.util,false); countTo(tUtil,+b.dataset.util,true);
+      heatmap(parseFloat(b.dataset.heat));
+    }
+    sw.addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return;
+      sw.querySelectorAll('button').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); apply(b);});
+    apply(sw.querySelector('button.active')||sw.querySelector('button'));
+  })();
 </script>
 </body>
 </html>
