@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深言速舟（宁波）智能科技有限公司 · 轻资产 AI 基础设施服务</title>
+<meta name="description" content="深言速舟是一家轻资产 AI 基础设施服务公司，专注 GPU 集群调度、大模型推理优化与企业 AI 平台交付。不自建、不持有、不转卖算力。把每一张卡，变成可计价的产能。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2B58'/%3E%3Ctext x='32' y='44' font-size='36' font-family='serif' font-weight='700' text-anchor='middle' fill='%235B5BD6'%3E舟%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#1B2B58;        /* 深墨蓝：标题 */
+    --accent:#5B5BD6;     /* 蓝紫：单一强调 */
+    --accent-soft:#EEEEFB;
+    --ok:#1F9D6B;         /* 绿：仅表确认/正向 */
+    --body:#3A425A;       /* 正文 */
+    --muted:#6B7488;      /* 次要 */
+    --line:#E6E8EF;
+    --bg:#FFFFFF;
+    --bg-soft:#F7F8FB;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+    color:var(--body);background:var(--bg);line-height:1.7;
+    -webkit-font-smoothing:antialiased;font-size:16px;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ── Header ── */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .brand .mark{width:30px;height:30px;border-radius:8px;background:var(--ink);color:var(--accent);display:grid;place-items:center;font-family:serif;font-size:19px}
+  .brand .en-name{font-size:15px}
+  .navlinks{display:flex;align-items:center;gap:26px;font-size:14.5px;color:var(--muted)}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks .l{display:none}
+  @media(min-width:860px){.navlinks .l{display:inline}}
+  .lang{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13px;padding:6px 12px;border-radius:20px;font-weight:600;letter-spacing:.03em}
+  .lang:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ── section scaffold ── */
+  section{padding:88px 0}
+  .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  h2{color:var(--ink);font-size:clamp(24px,3.4vw,34px);line-height:1.3;font-weight:700;letter-spacing:.01em;max-width:22em}
+  .lead{color:var(--muted);font-size:17px;margin-top:16px;max-width:44em}
+
+  /* ── Hero ── */
+  .hero{padding:100px 0 84px;background:
+     radial-gradient(1200px 500px at 78% -8%,var(--accent-soft),transparent 60%),
+     linear-gradient(180deg,#fff,var(--bg-soft))}
+  .hero .co{font-size:14px;color:var(--muted);letter-spacing:.04em;margin-bottom:22px}
+  .hero h1{color:var(--ink);font-size:clamp(30px,5.4vw,54px);line-height:1.18;font-weight:800;letter-spacing:.01em}
+  .hero h1 .hl{color:var(--accent)}
+  .hero .sub{margin-top:22px;font-size:clamp(16px,2.2vw,19px);color:var(--body);max-width:40em}
+  .hero .tags{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .tag{font-size:13px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:7px 13px;border-radius:20px}
+  .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-block;font-weight:600;font-size:15px;padding:13px 26px;border-radius:26px;transition:.15s}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:var(--accent)}
+  .btn-ghost{color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ── era ── */
+  .era{background:var(--ink);color:#fff}
+  .era .eyebrow{color:#9AA0FF}
+  .era h2{color:#fff;max-width:20em}
+  .era-grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:40px}
+  @media(min-width:760px){.era-grid{grid-template-columns:repeat(3,1fr)}}
+  .era-card{border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:24px}
+  .era-card .n{color:#9AA0FF;font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:10px}
+  .era-card p{color:rgba(255,255,255,.82);font-size:15px}
+  .anchor-line{margin-top:40px;font-size:clamp(18px,2.6vw,24px);font-weight:700;color:#fff;line-height:1.5;border-left:3px solid var(--accent);padding-left:20px;max-width:26em}
+
+  /* ── overview 3col ── */
+  .cols3{display:grid;gap:24px;grid-template-columns:1fr;margin-top:44px}
+  @media(min-width:760px){.cols3{grid-template-columns:repeat(3,1fr)}}
+  .ocard{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .ocard h3{color:var(--ink);font-size:18px;margin-bottom:12px;font-weight:700}
+  .ocard p{font-size:15px;color:var(--body)}
+
+  /* ── services ── */
+  .svc{border-top:1px solid var(--line);padding:34px 0;display:grid;gap:8px 40px;grid-template-columns:1fr}
+  @media(min-width:820px){.svc{grid-template-columns:64px 1fr 1fr;align-items:start}}
+  .svc .idx{font-family:serif;font-size:34px;color:var(--accent);font-weight:700;line-height:1}
+  .svc h3{color:var(--ink);font-size:20px;font-weight:700}
+  .svc .claim{color:var(--accent);font-size:14.5px;font-weight:600;margin-top:6px}
+  .svc p{font-size:15px;color:var(--body);margin-top:4px}
+  .svc .who{font-size:13.5px;color:var(--muted);margin-top:10px}
+
+  /* ── moat 2x2 ── */
+  .moat-grid{display:grid;gap:20px;grid-template-columns:1fr;margin-top:44px}
+  @media(min-width:720px){.moat-grid{grid-template-columns:repeat(2,1fr)}}
+  .mcard{border:1px solid var(--line);border-radius:14px;padding:26px;background:#fff}
+  .mcard .k{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;margin-bottom:12px}
+  .mcard h3{color:var(--ink);font-size:17px;font-weight:700;margin-bottom:8px}
+  .mcard p{font-size:14.5px;color:var(--body)}
+
+  /* ── metrics ── */
+  .metrics{background:var(--bg-soft)}
+  .mgrid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr);margin-top:44px}
+  @media(min-width:820px){.mgrid{grid-template-columns:repeat(4,1fr)}}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 22px;text-align:center}
+  .metric .big{color:var(--ink);font-size:clamp(26px,3.6vw,34px);font-weight:800;line-height:1.1}
+  .metric .lbl{color:var(--muted);font-size:13.5px;margin-top:10px}
+  .attr{margin-top:24px;font-size:13.5px;color:var(--muted);text-align:center}
+
+  /* ── delivery ── */
+  .steps{display:grid;gap:22px;grid-template-columns:1fr;margin-top:44px}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{position:relative;padding:26px;border:1px solid var(--line);border-radius:16px}
+  .step .s{width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center;margin-bottom:14px}
+  .step h3{color:var(--ink);font-size:17px;font-weight:700;margin-bottom:8px}
+  .step p{font-size:14.5px;color:var(--body)}
+  .rules{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+  .rule{font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:24px;padding:9px 16px}
+  .rule::before{content:"✓";color:var(--ok);font-weight:700;margin-right:8px}
+
+  /* ── team ── */
+  .team{background:var(--ink);color:#fff}
+  .team .eyebrow{color:#9AA0FF}
+  .team h2{color:#fff}
+  .team p.body{color:rgba(255,255,255,.85);font-size:clamp(16px,2vw,19px);margin-top:24px;max-width:46em;line-height:1.8}
+  .team .clients{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+  .team .cl{border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:14px 18px;font-size:14px;color:rgba(255,255,255,.8)}
+  .team .note{margin-top:20px;font-size:13px;color:rgba(255,255,255,.55)}
+
+  /* ── contact ── */
+  .contact{text-align:center}
+  .contact h2{margin:0 auto;max-width:20em}
+  .contact .lead{margin:18px auto 0}
+  .contact .loc{margin-top:26px;font-size:15px;color:var(--muted)}
+  .contact .cta{justify-content:center}
+
+  /* ── footer ── */
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13.5px}
+  .foot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .foot .fname{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="mark">舟</span>
+      <span class="zh-name" data-zh="深言速舟" data-en="Shenyan Suzhou">深言速舟</span>
+    </a>
+    <nav class="navlinks">
+      <a class="l" href="#services" data-zh="服务" data-en="Services">服务</a>
+      <a class="l" href="#moat" data-zh="技术壁垒" data-en="Technology">技术壁垒</a>
+      <a class="l" href="#metrics" data-zh="工程实绩" data-en="Track Record">工程实绩</a>
+      <a class="l" href="#delivery" data-zh="合作方式" data-en="Engagement">合作方式</a>
+      <a class="l" href="#contact" data-zh="联系" data-en="Contact">联系</a>
+      <button class="lang" id="langBtn" aria-label="switch language">EN</button>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="co" data-zh="深言速舟（宁波）智能科技有限公司" data-en="Shenyan Suzhou (Ningbo) Intelligent Technology Co., Ltd.">深言速舟（宁波）智能科技有限公司</div>
+    <h1 data-zh="把每一张卡，<br>变成可计价的产能。" data-en="Turn every GPU<br>into billable capacity.">把每一张卡，<br>变成可计价的产能。</h1>
+    <p class="sub" data-zh="一家轻资产 AI 基础设施服务公司，专注 GPU 集群调度、大模型推理优化与企业 AI 平台交付。不自建、不持有、不转卖算力。" data-en="A capital-light AI infrastructure company focused on GPU cluster scheduling, LLM inference optimization, and enterprise AI platform delivery. We don't build, own, or resell compute.">一家轻资产 AI 基础设施服务公司，专注 GPU 集群调度、大模型推理优化与企业 AI 平台交付。不自建、不持有、不转卖算力。</p>
+    <div class="tags">
+      <span class="tag" data-zh="GPU 集群调度" data-en="GPU Cluster Scheduling">GPU 集群调度</span>
+      <span class="tag" data-zh="大模型推理优化" data-en="LLM Inference Optimization">大模型推理优化</span>
+      <span class="tag" data-zh="企业 AI 平台交付" data-en="Enterprise AI Platforms">企业 AI 平台交付</span>
+      <span class="tag" data-zh="离线 · 信创全栈" data-en="Air-gapped · Domestic-stack">离线 · 信创全栈</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="#contact" data-zh="预约免费诊断" data-en="Book a free assessment">预约免费诊断</a>
+      <a class="btn btn-ghost" href="#services" data-zh="了解服务体系" data-en="Explore our services">了解服务体系</a>
+    </div>
+  </div>
+</section>
+
+<!-- Era -->
+<section class="era" id="era">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="时代判断" data-en="The Shift">时代判断</span>
+    <h2 data-zh="智能算力，进入效率时代。" data-en="Intelligent compute enters the age of efficiency.">智能算力，进入效率时代。</h2>
+    <div class="era-grid">
+      <div class="era-card">
+        <div class="n">01</div>
+        <p data-zh="推理正成为算力需求主体，负载结构日趋复杂。" data-en="Inference is becoming the dominant workload, and the load mix keeps growing more complex.">推理正成为算力需求主体，负载结构日趋复杂。</p>
+      </div>
+      <div class="era-card">
+        <div class="n">02</div>
+        <p data-zh="智算中心密集投运，供给侧快速铺开。" data-en="Intelligent-compute centers are coming online densely; supply is expanding fast.">智算中心密集投运，供给侧快速铺开。</p>
+      </div>
+      <div class="era-card">
+        <div class="n">03</div>
+        <p data-zh="单纯扩容的边际效益递减，利用率成为新的瓶颈。" data-en="The returns on simply adding hardware are diminishing; utilization is the new bottleneck.">单纯扩容的边际效益递减，利用率成为新的瓶颈。</p>
+      </div>
+    </div>
+    <div class="anchor-line" data-zh="算力基础设施的竞争，正在从“建得多”转向“用得好”。" data-en="Competition in compute infrastructure is shifting from building more to running it well.">算力基础设施的竞争，正在从“建得多”转向“用得好”。</div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section id="overview">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="公司速览" data-en="At a Glance">公司速览</span>
+    <h2 data-zh="站在推理引擎与集群调度之间的工程层，做效率释放。" data-en="We sit at the engineering layer between inference engines and cluster scheduling — releasing efficiency.">站在推理引擎与集群调度之间的工程层，做效率释放。</h2>
+    <div class="cols3">
+      <div class="ocard">
+        <h3 data-zh="我们是谁" data-en="Who we are">我们是谁</h3>
+        <p data-zh="源自北美一线科技企业与开源社区的 AI 基础设施工程团队，向下做调度治理，向上做推理优化与平台交付。" data-en="An AI-infrastructure engineering team from top North-American tech companies and open-source communities — scheduling and governance below, inference optimization and platform delivery above.">源自北美一线科技企业与开源社区的 AI 基础设施工程团队，向下做调度治理，向上做推理优化与平台交付。</p>
+      </div>
+      <div class="ocard">
+        <h3 data-zh="解决什么" data-en="What we solve">解决什么</h3>
+        <p data-zh="帮持卡方把集群利用率提上去，帮用模方把推理的单位成本降下来，把分散算力治理为可运营的资源池。" data-en="We help compute owners lift cluster utilization and help model users cut inference unit cost — turning scattered compute into an operable resource pool.">帮持卡方把集群利用率提上去，帮用模方把推理的单位成本降下来，把分散算力治理为可运营的资源池。</p>
+      </div>
+      <div class="ocard">
+        <h3 data-zh="怎么开始" data-en="How to start">怎么开始</h3>
+        <p data-zh="先做一次免费诊断，用数字说话；再以小范围试点验证效果，最后进入平台级交付与长期运维。" data-en="Start with a free assessment that lets the numbers speak, validate impact in a scoped pilot, then move into platform delivery and long-term operations.">先做一次免费诊断，用数字说话；再以小范围试点验证效果，最后进入平台级交付与长期运维。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="服务体系" data-en="Services">服务体系</span>
+    <h2 data-zh="三条服务线，同一个目标：效率释放。" data-en="Three service lines, one goal: releasing efficiency.">三条服务线，同一个目标：效率释放。</h2>
+
+    <div class="svc">
+      <div class="idx">01</div>
+      <div>
+        <h3 data-zh="算力调度与利用率提升" data-en="Scheduling & Utilization">算力调度与利用率提升</h3>
+        <div class="claim" data-zh="把分散算力，治理为可运营的资源池" data-en="Turn scattered compute into an operable resource pool">把分散算力，治理为可运营的资源池</div>
+      </div>
+      <div>
+        <p data-zh="面向持卡方，构建生产级多租户调度与混合负载 SLA 保障：训练、批量推理、在线推理同集群混跑，在线独占保时延，训练弹性回收，批量见缝插针。" data-en="For compute owners: production-grade multi-tenant scheduling with mixed-workload SLA guarantees — training, batch and online inference co-scheduled on one cluster, online workloads protected, training elastically reclaimed, batch backfilled into the gaps.">面向持卡方，构建生产级多租户调度与混合负载 SLA 保障：训练、批量推理、在线推理同集群混跑，在线独占保时延，训练弹性回收，批量见缝插针。</p>
+        <div class="who" data-zh="核心能力，作用于整个集群经济模型。" data-en="Our core capability — acting on the entire cluster economics.">核心能力，作用于整个集群经济模型。</div>
+      </div>
+    </div>
+
+    <div class="svc">
+      <div class="idx">02</div>
+      <div>
+        <h3 data-zh="大模型推理部署与优化" data-en="Inference Deployment & Optimization">大模型推理部署与优化</h3>
+        <div class="claim" data-zh="单位成本与尾延迟，双线收敛" data-en="Converge unit cost and tail latency together">单位成本与尾延迟，双线收敛</div>
+      </div>
+      <div>
+        <p data-zh="基于 vLLM / SGLang，面向大规模 MoE 与多卡部署做全链路优化，对 token 的单位成本与尾延迟同时收敛。" data-en="Built on vLLM / SGLang, full-stack optimization for large-scale MoE and multi-GPU deployments — converging both per-token cost and tail latency.">基于 vLLM / SGLang，面向大规模 MoE 与多卡部署做全链路优化，对 token 的单位成本与尾延迟同时收敛。</p>
+        <div class="who" data-zh="团队为 SGLang 等开源推理项目的重要贡献者。" data-en="The team are active contributors to SGLang and other open-source inference projects.">团队为 SGLang 等开源推理项目的重要贡献者。</div>
+      </div>
+    </div>
+
+    <div class="svc">
+      <div class="idx">03</div>
+      <div>
+        <h3 data-zh="企业 AI 平台与智能体交付" data-en="Enterprise AI Platforms & Agents">企业 AI 平台与智能体交付</h3>
+        <div class="claim" data-zh="离线 + 信创全栈，私有化落地" data-en="Air-gapped, domestic-stack, on-premise delivery">离线 + 信创全栈，私有化落地</div>
+      </div>
+      <div>
+        <p data-zh="面向政企与制造业，交付可离线、可信创的企业 AI 平台与业务智能体，从模型到集群全栈贯通、私有化落地。" data-en="For the public sector, enterprises and manufacturing: air-gapped, domestic-stack-compatible AI platforms and business agents, fully integrated from model to cluster and deployed on-premise.">面向政企与制造业，交付可离线、可信创的企业 AI 平台与业务智能体，从模型到集群全栈贯通、私有化落地。</p>
+        <div class="who" data-zh="以真实交付经验支撑的国内实施能力。" data-en="Backed by hands-on domestic implementation experience.">以真实交付经验支撑的国内实施能力。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Moat -->
+<section id="moat">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="技术壁垒" data-en="Our Moat">技术壁垒</span>
+    <h2 data-zh="从推理引擎到集群调度，全栈贯通。" data-en="Full-stack, from inference engine to cluster scheduler.">从推理引擎到集群调度，全栈贯通。</h2>
+    <div class="moat-grid">
+      <div class="mcard">
+        <div class="k">01</div>
+        <h3 data-zh="生产级混合负载 SLA 调度" data-en="Production-grade mixed-workload SLA scheduling">生产级混合负载 SLA 调度</h3>
+        <p data-zh="多类负载同集群混跑并保障 SLA 的生产级调度经验，在国内几乎无完整对标。" data-en="Production experience co-scheduling multiple workload types on one cluster while holding SLA — with no complete domestic counterpart.">多类负载同集群混跑并保障 SLA 的生产级调度经验，在国内几乎无完整对标。</p>
+      </div>
+      <div class="mcard">
+        <div class="k">02</div>
+        <h3 data-zh="离线 + 信创全栈交付" data-en="Air-gapped + domestic-stack delivery">离线 + 信创全栈交付</h3>
+        <p data-zh="完全离线环境下的平台构建与信创同构交付能力，付费能力最强、竞争最少。" data-en="Platform build-out in fully air-gapped environments with domestic-stack compatibility — highest willingness to pay, least competition.">完全离线环境下的平台构建与信创同构交付能力，付费能力最强、竞争最少。</p>
+      </div>
+      <div class="mcard">
+        <div class="k">03</div>
+        <h3 data-zh="YuniKorn 实战深度" data-en="Deep YuniKorn expertise">YuniKorn 实战深度</h3>
+        <p data-zh="自定义调度器的实现级实战经验，具备 Apache 社区圈层的技术纵深。" data-en="Implementation-level experience with custom schedulers and depth rooted in the Apache community.">自定义调度器的实现级实战经验，具备 Apache 社区圈层的技术纵深。</p>
+      </div>
+      <div class="mcard">
+        <div class="k">04</div>
+        <h3 data-zh="国际主流 + 国产双栈" data-en="Mainstream + domestic dual-stack">国际主流 + 国产双栈</h3>
+        <p data-zh="国际主流与国产算力双栈适配能力，覆盖从主流生态到国产化的部署需求。" data-en="Dual-stack support across mainstream international and domestic accelerators, covering the full range from mainstream ecosystems to localization.">国际主流与国产算力双栈适配能力，覆盖从主流生态到国产化的部署需求。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics -->
+<section id="metrics" class="metrics">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="工程实绩" data-en="Track Record">工程实绩</span>
+    <h2 data-zh="能力经过大规模生产环境验证。" data-en="Capabilities proven at production scale.">能力经过大规模生产环境验证。</h2>
+    <div class="mgrid">
+      <div class="metric">
+        <div class="big" data-zh="550+" data-en="550+">550+</div>
+        <div class="lbl" data-zh="服务内部工程师，从零搭建 K8s 批量推理平台" data-en="internal engineers served on a from-scratch K8s batch-inference platform">服务内部工程师，从零搭建 K8s 批量推理平台</div>
+      </div>
+      <div class="metric">
+        <div class="big" data-zh="40% → 70%+" data-en="40% → 70%+">40% → 70%+</div>
+        <div class="lbl" data-zh="集群利用率提升" data-en="cluster utilization lift">集群利用率提升</div>
+      </div>
+      <div class="metric">
+        <div class="big" data-zh="6h → 20min" data-en="6h → 20min">6h → 20min</div>
+        <div class="lbl" data-zh="作业排队时间压缩" data-en="job queue time compressed">作业排队时间压缩</div>
+      </div>
+      <div class="metric">
+        <div class="big" data-zh="3 类负载" data-en="3 workloads">3 类负载</div>
+        <div class="lbl" data-zh="训练 / 批量推理 / 在线推理同集群混跑并保 SLA" data-en="training / batch / online inference co-scheduled with SLA held">训练 / 批量推理 / 在线推理同集群混跑并保 SLA</div>
+      </div>
+    </div>
+    <p class="attr" data-zh="以上为核心团队成员曾在 Apple 等北美一线科技企业 AI/ML 基础设施部门取得的实测结果。" data-en="The figures above are measured results achieved by core team members while working in the AI/ML infrastructure organizations of Apple and other top North-American technology companies.">以上为核心团队成员曾在 Apple 等北美一线科技企业 AI/ML 基础设施部门取得的实测结果。</p>
+  </div>
+</section>
+
+<!-- Delivery -->
+<section id="delivery">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="合作方式" data-en="Engagement">合作方式</span>
+    <h2 data-zh="三步推进，用数字建立信任。" data-en="Three steps, trust built on numbers.">三步推进，用数字建立信任。</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="s">1</div>
+        <h3 data-zh="免费诊断" data-en="Free assessment">免费诊断</h3>
+        <p data-zh="对现有集群与推理链路做一次评估，用真实数字呈现效率空间。" data-en="An assessment of your current cluster and inference stack, quantifying the efficiency headroom with real numbers.">对现有集群与推理链路做一次评估，用真实数字呈现效率空间。</p>
+      </div>
+      <div class="step">
+        <div class="s">2</div>
+        <h3 data-zh="效果试点" data-en="Impact pilot">效果试点</h3>
+        <p data-zh="在小范围内落地优化方案，验证利用率与成本的可量化改善。" data-en="Deploy the optimization in a scoped pilot to validate measurable gains in utilization and cost.">在小范围内落地优化方案，验证利用率与成本的可量化改善。</p>
+      </div>
+      <div class="step">
+        <div class="s">3</div>
+        <h3 data-zh="平台交付" data-en="Platform delivery">平台交付</h3>
+        <p data-zh="进入平台级调度与推理体系建设，并提供长期运维与持续优化。" data-en="Move into platform-level scheduling and inference build-out, with long-term operations and continuous optimization.">进入平台级调度与推理体系建设，并提供长期运维与持续优化。</p>
+      </div>
+    </div>
+    <div class="rules">
+      <span class="rule" data-zh="不碰算力买卖" data-en="We never trade compute">不碰算力买卖</span>
+      <span class="rule" data-zh="不动生产系统" data-en="We never touch production without control">不动生产系统</span>
+      <span class="rule" data-zh="不引用未实测数字" data-en="We never cite unmeasured numbers">不引用未实测数字</span>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section id="team" class="team">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="核心团队" data-en="The Team">核心团队</span>
+    <h2 data-zh="贯通引擎与集群的工程团队。" data-en="An engineering team spanning engines and clusters.">贯通引擎与集群的工程团队。</h2>
+    <p class="body" data-zh="核心团队成员源自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职务，构建并运营数十万卡级训推平台，服务 550 余名内部工程师，是 Apache、SGLang 等知名开源项目的重要贡献者。" data-en="Our core team comes from top North-American technology companies and open-source communities. They held key engineering roles in the AI/ML infrastructure organizations of Apple and other companies, built and operated training-and-inference platforms at the scale of hundreds of thousands of accelerators serving 550+ internal engineers, and are significant contributors to well-known open-source projects including Apache and SGLang.">核心团队成员源自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职务，构建并运营数十万卡级训推平台，服务 550 余名内部工程师，是 Apache、SGLang 等知名开源项目的重要贡献者。</p>
+    <div class="clients">
+      <div class="cl" data-zh="在建 · 华东某科技企业推理平台" data-en="In progress · Inference platform for a technology enterprise in East China">在建 · 华东某科技企业推理平台</div>
+      <div class="cl" data-zh="在建 · 浙江某汽车零部件制造集团 AI 平台" data-en="In progress · AI platform for an auto-parts manufacturing group in Zhejiang">在建 · 浙江某汽车零部件制造集团 AI 平台</div>
+    </div>
+    <p class="note" data-zh="出于客户合规要求，在建项目均作脱敏处理，不提前引用未实测性能数据。" data-en="For client compliance, projects in progress are anonymized, and no unmeasured performance data is cited ahead of time.">出于客户合规要求，在建项目均作脱敏处理，不提前引用未实测性能数据。</p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="eyebrow" data-zh="联系我们" data-en="Contact">联系我们</span>
+    <h2 data-zh="从一次免费诊断，开始把算力变成产能。" data-en="Start turning compute into capacity — with a free assessment.">从一次免费诊断，开始把算力变成产能。</h2>
+    <p class="lead" data-zh="如果您持有 GPU 集群、正在跑大模型推理，或计划建设企业 AI 平台，欢迎与我们联系，先做一次不承诺、用数字说话的评估。" data-en="If you own a GPU cluster, run LLM inference, or plan to build an enterprise AI platform, reach out for a no-commitment assessment that lets the numbers speak.">如果您持有 GPU 集群、正在跑大模型推理，或计划建设企业 AI 平台，欢迎与我们联系，先做一次不承诺、用数字说话的评估。</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#top" data-zh="商务合作请联系" data-en="Get in touch for partnerships">商务合作请联系</a>
+    </div>
+    <div class="loc" data-zh="深言速舟（宁波）智能科技有限公司 · 浙江 · 宁波" data-en="Shenyan Suzhou (Ningbo) Intelligent Technology Co., Ltd. · Ningbo, Zhejiang, China">深言速舟（宁波）智能科技有限公司 · 浙江 · 宁波</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span class="fname" data-zh="深言速舟（宁波）智能科技有限公司" data-en="Shenyan Suzhou (Ningbo) Intelligent Technology Co., Ltd.">深言速舟（宁波）智能科技有限公司</span>
+    <span data-zh="© 2026 深言速舟 · 保留所有权利" data-en="© 2026 Shenyan Suzhou · All rights reserved">© 2026 深言速舟 · 保留所有权利</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var lang = 'zh';
+  var btn = document.getElementById('langBtn');
+  var nodes = document.querySelectorAll('[data-zh]');
+  function apply(l){
+    document.documentElement.lang = (l === 'zh' ? 'zh' : 'en');
+    nodes.forEach(function(n){
+      var v = n.getAttribute('data-' + l);
+      if(v === null) return;
+      // preserve <br> in a couple of headline strings
+      if(v.indexOf('<br>') !== -1){ n.innerHTML = v; } else { n.textContent = v; }
+    });
+    btn.textContent = (l === 'zh' ? 'EN' : '中文');
+  }
+  btn.addEventListener('click', function(){
+    lang = (lang === 'zh' ? 'en' : 'zh');
+    apply(lang);
+  });
+})();
+</script>
+
+</body>
+</html>
