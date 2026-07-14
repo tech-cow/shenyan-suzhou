@@ -3,42 +3,407 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#071124">
+  <meta name="theme-color" content="#04060d">
   <title>深言速舟｜AI 基础设施工程</title>
   <meta name="description" content="深言速舟专注 GPU 集群调度、大模型推理优化与企业 AI 平台交付，把每一张卡变成可计价的产能。">
   <link rel="icon" href="assets/shenyan-logo.png">
   <style>
-    :root{--navy:#071124;--ink:#1B2B58;--violet:#5B5BD6;--cyan:#39D9FF;--paper:#F6F8FC;--line:#DDE3EF;--muted:#62708B;--white:#fff;--max:1200px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--navy);background:#fff;font:16px/1.65 Inter,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}.mono{font-family:"SFMono-Regular",Consolas,monospace}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--violet);font:700 12px/1.2 "SFMono-Regular",Consolas,monospace;letter-spacing:.15em;text-transform:uppercase}.eyebrow:before{content:"";width:26px;height:1px;background:currentColor}h1,h2,h3,p{margin-top:0}h2{font-size:clamp(32px,4vw,56px);line-height:1.08;letter-spacing:-.045em;margin:20px 0 16px;max-width:820px}section{padding:112px 0}.lead{max-width:700px;color:var(--muted);font-size:18px}.grid-noise{background-image:linear-gradient(rgba(91,91,214,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(91,91,214,.055) 1px,transparent 1px);background-size:40px 40px}
-    header{position:fixed;inset:0 0 auto;z-index:20;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(7,17,36,.78);backdrop-filter:blur(18px)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;color:#fff}.brand{display:flex;align-items:center;gap:12px;font-weight:760;letter-spacing:.03em}.brand img{width:38px;height:38px;border-radius:10px;object-fit:cover}.brand small{display:block;color:#9EADD0;font-size:9px;letter-spacing:.17em}.links{display:flex;align-items:center;gap:28px;font-size:14px;color:#BDC7DD}.links a:hover{color:#fff}.lang{border:1px solid #465371;border-radius:999px;color:#fff;background:transparent;padding:7px 13px;cursor:pointer}
-    .hero{min-height:780px;padding:160px 0 90px;color:#fff;overflow:hidden;background:radial-gradient(circle at 77% 42%,rgba(91,91,214,.34),transparent 25%),radial-gradient(circle at 83% 35%,rgba(57,217,255,.12),transparent 18%),var(--navy)}.hero-grid{display:grid;grid-template-columns:1.16fr .84fr;gap:72px;align-items:center}.hero .eyebrow{color:#8D92FF}.hero h1{font-size:clamp(52px,7.1vw,92px);line-height:.98;letter-spacing:-.07em;margin:28px 0}.hero h1 span{background:linear-gradient(100deg,#fff 5%,#9DA2FF 50%,#39D9FF);background-clip:text;color:transparent}.hero-copy{max-width:660px;color:#B8C3D9;font-size:19px}.hero-copy b{color:#fff}.hero-actions{display:flex;gap:14px;margin-top:34px}.btn{display:inline-flex;align-items:center;gap:10px;border-radius:10px;padding:13px 20px;font-weight:700}.btn.primary{background:#fff;color:var(--navy)}.btn.secondary{border:1px solid #3D4B68;color:#fff}.proof{display:flex;gap:24px;margin-top:48px;color:#8F9AB2;font:12px/1.4 monospace}.proof span{display:flex;align-items:center;gap:7px}.proof i{width:7px;height:7px;border-radius:50%;background:#42E1A9;box-shadow:0 0 12px #42E1A9}
-    .system{position:relative;aspect-ratio:1;border:1px solid rgba(255,255,255,.13);border-radius:50%;display:grid;place-items:center}.system:before,.system:after{content:"";position:absolute;border:1px solid rgba(91,91,214,.32);border-radius:50%}.system:before{inset:13%}.system:after{inset:29%}.system img{position:relative;z-index:2;width:32%;border-radius:26px;box-shadow:0 30px 90px rgba(0,0,0,.5)}.orbit{position:absolute;inset:5%;animation:spin 28s linear infinite}.node{position:absolute;width:108px;padding:10px 12px;border:1px solid #34415F;background:#0D1A34;border-radius:9px;color:#BFC8DD;font:11px/1.35 monospace}.node b{display:block;color:#55DDFC}.n1{top:6%;left:20%}.n2{right:-4%;top:43%}.n3{bottom:5%;left:15%}@keyframes spin{to{transform:rotate(360deg)}}.orbit .node{animation:spin 28s linear infinite reverse}
-    .signal{padding:34px 0;background:#101B39;color:#CFD6E6;border-top:1px solid #27334F;border-bottom:1px solid #27334F}.signal .wrap{display:flex;justify-content:space-between;gap:36px;overflow:hidden}.signal span{white-space:nowrap;font:600 12px monospace;letter-spacing:.12em}.signal b{color:#55DDFC}
-    .thesis{background:var(--paper)}.thesis-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:100px}.thesis-quote{font-size:clamp(32px,4vw,52px);line-height:1.12;letter-spacing:-.045em}.thesis-quote em{font-style:normal;color:var(--violet)}.shift-list{border-top:1px solid var(--line)}.shift{display:grid;grid-template-columns:52px 1fr;padding:26px 0;border-bottom:1px solid var(--line)}.shift .num{color:var(--violet);font:700 12px monospace}.shift h3{font-size:18px;margin-bottom:6px}.shift p{color:var(--muted);margin:0}
-    .services{background:#fff}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}.card{position:relative;padding:30px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-5px);border-color:#A6A8F4;box-shadow:0 20px 60px rgba(27,43,88,.1)}.card .index{color:var(--violet);font:700 12px monospace}.card .icon{width:50px;height:50px;border-radius:14px;margin:32px 0 26px;display:grid;place-items:center;background:#EEF0FF;color:var(--violet);font:700 19px monospace}.card h3{font-size:24px;line-height:1.25;margin-bottom:14px}.card p{color:var(--muted)}.card ul{list-style:none;padding:0;margin:24px 0 0;border-top:1px solid var(--line)}.card li{padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}.card li:before{content:"→";color:var(--violet);margin-right:10px}
-    .stack{color:#fff;background:var(--navy)}.stack .eyebrow{color:#7DE4F8}.stack-head{display:flex;justify-content:space-between;gap:60px;align-items:end}.stack-head .lead{color:#9AA8C3}.layers{margin-top:56px;border:1px solid #283652;border-radius:20px;overflow:hidden}.layer{display:grid;grid-template-columns:90px 1fr 1.5fr;gap:30px;padding:27px 30px;border-bottom:1px solid #283652;align-items:center}.layer:last-child{border:0}.layer:hover{background:#0D1B37}.layer .tag{color:#61E0F8;font:700 11px monospace}.layer h3{margin:0;font-size:20px}.layer p{margin:0;color:#94A2BD;font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}.chip{border:1px solid #30405F;border-radius:999px;padding:8px 13px;color:#ADB9D0;font:12px monospace}
-    .metrics{background:linear-gradient(180deg,#F7F8FC,#fff)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metric{padding:40px 30px;border-right:1px solid var(--line)}.metric:last-child{border:0}.metric strong{display:block;color:var(--ink);font-size:clamp(42px,5vw,68px);line-height:1;letter-spacing:-.065em}.metric strong span{color:var(--violet)}.metric p{margin:16px 0 0;color:var(--muted)}.source{margin-top:18px;color:#8C96AA;font-size:12px}
-    .method{background:var(--paper)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px}.step{padding:30px;border-top:2px solid #CCD3E1}.step:first-child{border-color:var(--violet)}.step .num{font:700 12px monospace;color:var(--violet)}.step h3{font-size:22px;margin:20px 0 10px}.step p{color:var(--muted)}.disciplines{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}.discipline{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}.discipline b{display:block;margin-bottom:4px}.discipline span{color:var(--muted);font-size:13px}
-    .team{padding-bottom:0}.team-panel{border-radius:26px 26px 0 0;background:var(--ink);color:#fff;padding:72px}.team-panel .eyebrow{color:#83E5F6}.team-panel h2{max-width:920px}.team-panel p{max-width:780px;color:#C2CBDE;font-size:18px}.credentials{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}.credential{border:1px solid #566386;border-radius:999px;padding:8px 14px;font-size:13px;color:#DBE0EC}
-    .contact{padding:100px 0;background:#080F20;color:#fff}.contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:80px;align-items:end}.contact h2{font-size:clamp(40px,5vw,70px)}.contact h2 span{color:#8C91FF}.contact p{color:#9FACCA;max-width:650px}.contact-box{border:1px solid #31405F;border-radius:18px;padding:28px;background:#0C1831}.contact-box small{color:#7F8DA8}.contact-box strong{display:block;margin:12px 0 24px;font-size:20px}.placeholder{color:#75819B;font:12px monospace}footer{padding:26px 0;background:#080F20;color:#6F7B93;border-top:1px solid #202D48;font-size:12px}.foot{display:flex;justify-content:space-between}
-    @media(max-width:900px){.links a{display:none}.hero-grid,.thesis-grid,.contact-grid{grid-template-columns:1fr}.hero{min-height:auto}.system{max-width:520px;margin:auto}.service-grid,.metric-grid,.steps,.disciplines{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid var(--line)}.metric:last-child{border-bottom:0}.layer{grid-template-columns:70px 1fr}.layer p{grid-column:2}.team-panel{padding:48px 28px}.stack-head{display:block}}
-    @media(max-width:600px){.wrap{width:min(100% - 30px,var(--max))}section{padding:80px 0}.hero{padding-top:126px}.hero h1{font-size:48px}.hero-grid{gap:48px}.system{display:none}.proof{flex-direction:column;gap:10px}.signal .wrap{justify-content:flex-start}.layer{padding:22px 18px}.brand small{display:none}.contact h2{font-size:42px}.foot{display:block}.foot span{display:block;margin-top:6px}}
+    :root{
+      --bg:#04060d;--bg-2:#070b16;--panel:#0b1120;--panel-2:#0e1526;
+      --line:rgba(255,255,255,.09);--line-soft:rgba(255,255,255,.055);
+      --fg:#EDEFF5;--fg-2:#AEB6C6;--muted:#7E889B;
+      --accent:#6E7BF2;--accent-2:#39D9FF;--accent-3:#42E1A9;
+      --glow:rgba(110,123,242,.30);--max:1220px;
+      --mono:ui-monospace,"SF Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+      --sans:"Inter",system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}button{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .mono{font-family:var(--mono)}
+    ::selection{background:rgba(110,123,242,.35)}
+
+    /* shared type */
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--accent-2);font:600 12px/1.2 var(--mono);letter-spacing:.2em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:24px;height:1px;background:linear-gradient(90deg,var(--accent-2),transparent)}
+    h2{font-size:clamp(30px,4vw,54px);line-height:1.1;letter-spacing:-.03em;margin:20px 0 16px;max-width:900px;font-weight:680}
+    .lead{max-width:640px;color:var(--fg-2);font-size:18px;margin:0}
+    section{padding:130px 0;position:relative}
+    .grain:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(110,123,242,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(110,123,242,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(circle at 50% 0,#000,transparent 75%);mask-image:radial-gradient(circle at 50% 0,#000,transparent 75%)}
+
+    /* reveal */
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* header */
+    header{position:fixed;inset:0 0 auto;z-index:40;border-bottom:1px solid transparent;transition:.3s}
+    header.scrolled{background:rgba(4,6,13,.72);backdrop-filter:blur(18px);border-color:var(--line-soft)}
+    .nav{height:74px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em}
+    .brand img{width:34px;height:34px;border-radius:9px;object-fit:cover}
+    .brand small{display:block;color:var(--muted);font:9px/1.4 var(--mono);letter-spacing:.18em}
+    .links{display:flex;align-items:center;gap:30px;font-size:14px;color:var(--fg-2)}
+    .links a{position:relative;transition:.2s}.links a:hover{color:#fff}
+    .lang{border:1px solid var(--line);border-radius:999px;color:#fff;background:rgba(255,255,255,.03);padding:7px 14px;cursor:pointer;font:600 12px var(--mono);letter-spacing:.05em;transition:.2s}
+    .lang:hover{border-color:var(--accent);background:rgba(110,123,242,.12)}
+
+    /* hero */
+    .hero{padding:180px 0 120px;overflow:hidden}
+    .aurora{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .aurora b{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+    .aurora .a1{width:620px;height:620px;top:-160px;right:-60px;background:radial-gradient(circle,rgba(110,123,242,.55),transparent 65%);animation:drift 22s ease-in-out infinite}
+    .aurora .a2{width:520px;height:520px;top:40px;right:200px;background:radial-gradient(circle,rgba(57,217,255,.30),transparent 62%);animation:drift 28s ease-in-out infinite reverse}
+    .aurora .a3{width:460px;height:460px;top:220px;left:-120px;background:radial-gradient(circle,rgba(66,225,169,.16),transparent 60%);animation:drift 26s ease-in-out infinite}
+    @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,50px)}}
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center}
+    .hero h1{font-size:clamp(46px,6.6vw,88px);line-height:1;letter-spacing:-.055em;margin:26px 0;font-weight:720}
+    .hero h1 span{background:linear-gradient(100deg,#fff 10%,#AEB4FF 46%,var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-copy{max-width:600px;color:var(--fg-2);font-size:19px;line-height:1.6}
+    .hero-copy b{color:#fff;font-weight:600}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+    .btn{display:inline-flex;align-items:center;gap:9px;border-radius:11px;padding:14px 22px;font-weight:600;font-size:15px;transition:.22s;will-change:transform}
+    .btn.primary{background:linear-gradient(180deg,#fff,#E7E9F5);color:#0a0e1a}
+    .btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(110,123,242,.35)}
+    .btn.secondary{border:1px solid var(--line);color:#fff;background:rgba(255,255,255,.02)}
+    .btn.secondary:hover{border-color:var(--accent);background:rgba(110,123,242,.1)}
+    .proof{display:flex;flex-wrap:wrap;gap:22px;margin-top:44px;color:var(--muted);font:12px/1.4 var(--mono);letter-spacing:.08em}
+    .proof span{display:flex;align-items:center;gap:8px}
+    .proof i{width:7px;height:7px;border-radius:50%;background:var(--accent-3);box-shadow:0 0 12px var(--accent-3);animation:pulse 2.4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+    /* hero console panel */
+    .console{position:relative;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(20,26,45,.85),rgba(9,13,24,.9));backdrop-filter:blur(8px);padding:26px;box-shadow:0 40px 120px rgba(0,0,0,.55)}
+    .console:before{content:"";position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(140deg,rgba(110,123,242,.6),transparent 40%,rgba(57,217,255,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.7}
+    .console-top{display:flex;justify-content:space-between;align-items:center;font:11px var(--mono);letter-spacing:.14em;color:var(--muted)}
+    .console-top .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-3);box-shadow:0 0 10px var(--accent-3);margin-right:7px;vertical-align:middle}
+    .gauge{display:flex;align-items:center;gap:22px;margin:26px 0 24px}
+    .ring{--p:72;position:relative;width:118px;height:118px;border-radius:50%;flex:none;background:conic-gradient(var(--accent) calc(var(--p)*1%),rgba(255,255,255,.07) 0);display:grid;place-items:center}
+    .ring:before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--panel)}
+    .ring b{position:relative;font:700 26px/1 var(--mono);letter-spacing:-.02em}
+    .ring b s{font-size:14px;text-decoration:none;color:var(--accent-2)}
+    .gauge-meta small{color:var(--muted);font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+    .gauge-meta p{margin:8px 0 0;font-size:14px;color:var(--fg-2);line-height:1.5}
+    .gauge-meta .delta{color:var(--accent-3);font-family:var(--mono);font-size:12px}
+    .layers-mini{border-top:1px solid var(--line-soft);padding-top:18px;display:grid;gap:12px}
+    .lrow{display:flex;align-items:center;gap:12px}
+    .lrow .tag{font:600 10px var(--mono);letter-spacing:.1em;color:var(--accent-2);width:52px;flex:none}
+    .lrow .nm{font-size:13px;color:var(--fg-2);width:112px;flex:none}
+    .lrow .bar{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden}
+    .lrow .bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+    .in .lrow .bar i{width:var(--w)}
+
+    /* signal band */
+    .signal{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--bg-2)}
+    .signal .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+    .signal span{padding:26px 22px;border-left:1px solid var(--line-soft);font:12px/1.4 var(--mono);letter-spacing:.06em;color:var(--fg-2);display:flex;gap:12px;align-items:baseline}
+    .signal span:first-child{border-left:0}
+    .signal b{color:var(--accent);font-size:13px}
+    .signal em{font-style:normal}
+
+    /* thesis */
+    .thesis-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:90px;align-items:start}
+    .thesis-quote{font-size:clamp(28px,3.6vw,46px);line-height:1.15;letter-spacing:-.03em;font-weight:640;margin:22px 0 0}
+    .thesis-quote em{font-style:normal;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .shift-list{border-top:1px solid var(--line)}
+    .shift{display:grid;grid-template-columns:56px 1fr;gap:8px;padding:28px 0;border-bottom:1px solid var(--line)}
+    .shift .num{color:var(--accent);font:600 12px var(--mono);letter-spacing:.1em}
+    .shift h3{margin:0 0 8px;font-size:19px;font-weight:620}
+    .shift p{margin:0;color:var(--muted);font-size:15px}
+
+    /* services bento */
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+    .card{position:relative;padding:32px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,var(--panel),var(--bg-2));overflow:hidden;transition:transform .28s cubic-bezier(.16,1,.3,1),border-color .28s}
+    .card:after{content:"";position:absolute;inset:0;border-radius:20px;opacity:0;transition:.3s;background:radial-gradient(400px circle at 50% 0,rgba(110,123,242,.16),transparent 70%)}
+    .card:hover{transform:translateY(-6px);border-color:rgba(110,123,242,.5)}
+    .card:hover:after{opacity:1}
+    .card .index{color:var(--accent-2);font:600 11px var(--mono);letter-spacing:.14em}
+    .card .icon{width:52px;height:52px;border-radius:14px;margin:30px 0 24px;display:grid;place-items:center;background:rgba(110,123,242,.12);border:1px solid var(--line);color:var(--accent);font:600 22px var(--mono)}
+    .card h3{font-size:23px;line-height:1.25;margin:0 0 14px;font-weight:640}
+    .card>p{color:var(--fg-2);margin:0;font-size:15px}
+    .card ul{list-style:none;padding:0;margin:24px 0 0;border-top:1px solid var(--line-soft)}
+    .card li{padding:12px 0;border-bottom:1px solid var(--line-soft);font:12px var(--mono);letter-spacing:.03em;color:var(--muted);display:flex;gap:10px}
+    .card li:last-child{border-bottom:0}
+    .card li:before{content:"→";color:var(--accent)}
+
+    /* technology layers */
+    .stack-head{display:flex;justify-content:space-between;gap:60px;align-items:flex-end;flex-wrap:wrap}
+    .layers{margin-top:56px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
+    .layer{display:grid;grid-template-columns:96px 1.1fr 1.6fr;gap:28px;padding:28px 32px;border-bottom:1px solid var(--line-soft);align-items:center;transition:.25s}
+    .layer:last-child{border-bottom:0}
+    .layer:hover{background:rgba(110,123,242,.06)}
+    .layer .tag{color:var(--accent-2);font:600 11px var(--mono);letter-spacing:.1em}
+    .layer h3{margin:0;font-size:20px;font-weight:600}
+    .layer p{margin:0;color:var(--muted);font-size:14px;font-family:var(--mono);letter-spacing:.02em}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:34px}
+    .chip{border:1px solid var(--line);border-radius:999px;padding:9px 15px;color:var(--fg-2);font:11px var(--mono);letter-spacing:.08em}
+
+    /* metrics */
+    .metrics-band{background:linear-gradient(180deg,var(--bg-2),var(--bg))}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
+    .metric{padding:48px 36px;border-right:1px solid var(--line-soft);position:relative}
+    .metric:last-child{border-right:0}
+    .metric strong{display:block;font:700 clamp(40px,5vw,64px)/1 var(--mono);letter-spacing:-.04em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#B9C0FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .metric strong s{text-decoration:none;color:var(--accent-2);-webkit-text-fill-color:var(--accent-2)}
+    .metric p{margin:18px 0 0;color:var(--fg-2);font-size:15px;line-height:1.55}
+    .source{margin-top:20px;color:var(--muted);font:12px var(--mono)}
+
+    /* method */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px}
+    .step{padding:30px 30px 34px;border-top:2px solid var(--line)}
+    .step:first-child{border-color:var(--accent)}
+    .step .num{font:600 12px var(--mono);letter-spacing:.1em;color:var(--accent)}
+    .step h3{font-size:22px;margin:20px 0 10px;font-weight:620}
+    .step p{color:var(--muted);margin:0;font-size:15px}
+    .disciplines{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+    .discipline{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--panel)}
+    .discipline b{display:block;margin-bottom:6px;font-size:15px;font-weight:600}
+    .discipline b:before{content:"✓";color:var(--accent-3);margin-right:9px;font-family:var(--mono)}
+    .discipline span{color:var(--muted);font-size:13px}
+
+    /* team */
+    .team{padding-bottom:0}
+    .team-panel{position:relative;border:1px solid var(--line);border-bottom:0;border-radius:26px 26px 0 0;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:80px;overflow:hidden}
+    .team-panel:before{content:"";position:absolute;top:-120px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(57,217,255,.18),transparent 65%);filter:blur(30px);pointer-events:none}
+    .team-panel h2{max-width:860px}
+    .team-panel p{max-width:780px;color:var(--fg-2);font-size:18px;position:relative}
+    .credentials{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+    .credential{border:1px solid var(--line);border-radius:999px;padding:9px 15px;font:11px var(--mono);letter-spacing:.08em;color:var(--fg-2)}
+
+    /* contact */
+    .contact{padding:120px 0;background:var(--bg-2);border-top:1px solid var(--line-soft)}
+    .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:70px;align-items:end}
+    .contact h2{font-size:clamp(38px,5vw,64px)}
+    .contact h2 span{background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .contact p{color:var(--fg-2);max-width:640px}
+    .contact-box{border:1px solid var(--line);border-radius:18px;padding:30px;background:var(--panel)}
+    .contact-box small{color:var(--muted);font:11px var(--mono);letter-spacing:.14em}
+    .contact-box strong{display:block;margin:14px 0 24px;font-size:20px;font-weight:620}
+    .placeholder{color:var(--muted);font:12px var(--mono);border-top:1px solid var(--line-soft);padding-top:16px}
+
+    footer{padding:30px 0;background:var(--bg-2);color:var(--muted);border-top:1px solid var(--line-soft);font:12px var(--mono);letter-spacing:.04em}
+    .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+    @media(max-width:960px){
+      .hero-grid,.thesis-grid,.contact-grid{grid-template-columns:1fr}
+      .thesis-grid{gap:50px}
+      .service-grid,.metric-grid,.steps,.disciplines{grid-template-columns:1fr}
+      .metric{border-right:0;border-bottom:1px solid var(--line-soft)}.metric:last-child{border-bottom:0}
+      .layer{grid-template-columns:80px 1fr}.layer p{grid-column:2}
+      .signal .wrap{grid-template-columns:repeat(2,1fr)}.signal span:nth-child(-n+2){border-top:0}.signal span:nth-child(odd){border-left:0}
+      .team-panel{padding:52px 30px}
+    }
+    @media(max-width:600px){
+      .links a{display:none}
+      section{padding:88px 0}.hero{padding:140px 0 90px}
+      .hero-actions .btn{flex:1;justify-content:center}
+      .team-panel{padding:40px 24px}.brand small{display:none}
+      .foot{flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      .lrow .bar i{transition:none}
+    }
   </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="#top"><img src="assets/shenyan-logo.png" alt="深言速舟标志"><span data-zh="深言速舟<small>SHENYAN SUZHOU</small>" data-en="SHENYAN SUZHOU<small>AI INFRASTRUCTURE</small>">深言速舟<small>SHENYAN SUZHOU</small></span></a><nav class="links"><a href="#services" data-zh="解决方案" data-en="Solutions">解决方案</a><a href="#technology" data-zh="技术壁垒" data-en="Technology">技术壁垒</a><a href="#results" data-zh="工程实绩" data-en="Results">工程实绩</a><a href="#team" data-zh="团队" data-en="Team">团队</a><button class="lang" id="lang">EN</button></nav></div></header>
+<header id="hdr"><div class="wrap nav">
+  <a class="brand" href="#top"><img src="assets/shenyan-logo.png" alt="深言速舟标志"><span data-zh="深言速舟<small>SHENYAN SUZHOU</small>" data-en="SHENYAN SUZHOU<small>AI INFRASTRUCTURE</small>">深言速舟<small>SHENYAN SUZHOU</small></span></a>
+  <nav class="links">
+    <a href="#services" data-zh="解决方案" data-en="Solutions">解决方案</a>
+    <a href="#technology" data-zh="技术壁垒" data-en="Technology">技术壁垒</a>
+    <a href="#results" data-zh="工程实绩" data-en="Results">工程实绩</a>
+    <a href="#team" data-zh="团队" data-en="Team">团队</a>
+    <button class="lang" id="lang">EN</button>
+  </nav>
+</div></header>
+
 <main id="top">
-  <section class="hero grid-noise"><div class="wrap hero-grid"><div><div class="eyebrow" data-zh="AI 基础设施工程公司" data-en="AI INFRASTRUCTURE ENGINEERING">AI 基础设施工程公司</div><h1 data-zh="把每一张卡，<br><span>变成可计价的产能</span>" data-en="Turn every GPU into<br><span>billable capacity.</span>">把每一张卡，<br><span>变成可计价的产能</span></h1><p class="hero-copy" data-zh="我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。<b>不卖算力，只释放效率。</b>" data-en="We engineer the layer between inference engines and cluster schedulers—turning compute into an operable resource. <b>We don't resell compute. We release efficiency.</b>">我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。<b>不卖算力，只释放效率。</b></p><div class="hero-actions"><a class="btn primary" href="#contact" data-zh="预约效率诊断 →" data-en="Book an assessment →">预约效率诊断 →</a><a class="btn secondary" href="#results" data-zh="查看工程实绩" data-en="View track record">查看工程实绩</a></div><div class="proof"><span><i></i> GPU CLUSTER SCHEDULING</span><span><i></i> LLM INFERENCE</span><span><i></i> ENTERPRISE AI</span></div></div><div class="system" aria-hidden="true"><div class="orbit"><div class="node n1"><b>SCHEDULER</b>SLA / QUEUE</div><div class="node n2"><b>INFERENCE</b>TOKEN / LATENCY</div><div class="node n3"><b>PLATFORM</b>OBSERVE / GOVERN</div></div><img src="assets/shenyan-logo.png" alt=""></div></div></section>
-  <div class="signal"><div class="wrap"><span><b>01</b> 生产级混合负载</span><span><b>02</b> 推理全链路优化</span><span><b>03</b> 离线与信创交付</span><span><b>04</b> 国际主流 + 国产双栈</span></div></div>
-  <section class="thesis"><div class="wrap thesis-grid"><div><div class="eyebrow" data-zh="时代判断" data-en="THE SHIFT">时代判断</div><p class="thesis-quote" data-zh="算力竞争，正从<em>“建得多”</em>转向<em>“用得好”</em>。" data-en="The compute race is shifting from <em>building more</em> to <em>running better.</em>">算力竞争，正从<em>“建得多”</em>转向<em>“用得好”</em>。</p></div><div class="shift-list"><div class="shift"><span class="num">01</span><div><h3 data-zh="推理成为主负载" data-en="Inference becomes the dominant workload">推理成为主负载</h3><p data-zh="负载结构日趋复杂，时延、吞吐与成本必须同时收敛。" data-en="Workloads are more complex; latency, throughput and cost must converge together.">负载结构日趋复杂，时延、吞吐与成本必须同时收敛。</p></div></div><div class="shift"><span class="num">02</span><div><h3 data-zh="供给扩张，效率承压" data-en="Supply grows; efficiency gets harder">供给扩张，效率承压</h3><p data-zh="智算中心密集投运，单纯扩容的边际回报持续下降。" data-en="As compute centers come online, hardware expansion alone yields diminishing returns.">智算中心密集投运，单纯扩容的边际回报持续下降。</p></div></div><div class="shift"><span class="num">03</span><div><h3 data-zh="利用率成为经营指标" data-en="Utilization becomes a business metric">利用率成为经营指标</h3><p data-zh="每一张卡是否持续产出，决定算力资产的真实回报。" data-en="Whether every GPU keeps producing defines the real return on compute assets.">每一张卡是否持续产出，决定算力资产的真实回报。</p></div></div></div></div></section>
-  <section class="services" id="services"><div class="wrap"><div class="eyebrow" data-zh="三条服务线" data-en="THREE SERVICE LINES">三条服务线</div><h2 data-zh="从底层资源，到上层业务<br>贯穿 AI 生产链路" data-en="From infrastructure to outcomes,<br>across the AI production stack.">从底层资源，到上层业务<br>贯穿 AI 生产链路</h2><p class="lead" data-zh="不是标准化软件售卖，而是针对真实负载、真实集群和真实交付环境的工程服务。" data-en="Not off-the-shelf software—engineering for real workloads, real clusters and real deployment environments.">不是标准化软件售卖，而是针对真实负载、真实集群和真实交付环境的工程服务。</p><div class="service-grid"><article class="card"><span class="index">SERVICE / 01</span><div class="icon">∑</div><h3 data-zh="算力调度与<br>利用率提升" data-en="Scheduling &<br>Utilization">算力调度与<br>利用率提升</h3><p data-zh="把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。" data-en="Turn fragmented compute into an operable pool across training, batch and online inference.">把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。</p><ul><li>SLA-aware scheduling</li><li>Multi-tenant governance</li><li>Elastic reclaim & backfill</li></ul></article><article class="card"><span class="index">SERVICE / 02</span><div class="icon">λ</div><h3 data-zh="大模型推理<br>部署与优化" data-en="LLM Inference<br>Optimization">大模型推理<br>部署与优化</h3><p data-zh="基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。" data-en="Optimize large-scale MoE and multi-GPU deployments across unit cost and tail latency.">基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。</p><ul><li>Engine & kernel tuning</li><li>Multi-GPU topology</li><li>Token economics</li></ul></article><article class="card"><span class="index">SERVICE / 03</span><div class="icon">AI</div><h3 data-zh="企业 AI 平台<br>与智能体交付" data-en="Enterprise AI<br>Platforms & Agents">企业 AI 平台<br>与智能体交付</h3><p data-zh="面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。" data-en="Private, governable AI platforms and agents for enterprise, public sector and manufacturing.">面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。</p><ul><li>Air-gapped deployment</li><li>Domestic-stack ready</li><li>Model-to-cluster delivery</li></ul></article></div></div></section>
-  <section class="stack" id="technology"><div class="wrap"><div class="stack-head"><div><div class="eyebrow" data-zh="技术壁垒" data-en="ENGINEERING MOAT">技术壁垒</div><h2 data-zh="不是单点工具，<br>而是全栈工程闭环" data-en="Not a point solution.<br>A full-stack engineering loop.">不是单点工具，<br>而是全栈工程闭环</h2></div><p class="lead" data-zh="从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿。" data-en="From inference request to allocation, execution, observability and continuous optimization.">从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿。</p></div><div class="layers"><div class="layer"><span class="tag">LAYER 04</span><h3 data-zh="业务与治理" data-en="Business & Governance">业务与治理</h3><p data-zh="企业 AI 平台、智能体、权限、审计与私有化交付" data-en="Enterprise platforms, agents, access, audit and private delivery">企业 AI 平台、智能体、权限、审计与私有化交付</p></div><div class="layer"><span class="tag">LAYER 03</span><h3 data-zh="推理服务" data-en="Inference Serving">推理服务</h3><p>vLLM · SGLang · MoE · KV Cache · Tail Latency</p></div><div class="layer"><span class="tag">LAYER 02</span><h3 data-zh="集群调度" data-en="Cluster Scheduling">集群调度</h3><p>YuniKorn · Kubernetes · Mixed Workloads · SLA</p></div><div class="layer"><span class="tag">LAYER 01</span><h3 data-zh="异构算力" data-en="Heterogeneous Compute">异构算力</h3><p data-zh="国际主流与国产算力双栈适配，覆盖异构部署" data-en="Dual-stack adaptation across mainstream global and domestic accelerators">国际主流与国产算力双栈适配，覆盖异构部署</p></div></div><div class="chips"><span class="chip">PRODUCTION SLA</span><span class="chip">AIR-GAPPED</span><span class="chip">APACHE DEPTH</span><span class="chip">DUAL-STACK</span><span class="chip">OPEN SOURCE</span></div></div></section>
-  <section class="metrics" id="results"><div class="wrap"><div class="eyebrow" data-zh="工程实绩" data-en="PROVEN IN PRODUCTION">工程实绩</div><h2 data-zh="能力经过大规模<br>生产环境验证" data-en="Proven in large-scale<br>production environments.">能力经过大规模<br>生产环境验证</h2><div class="metric-grid"><div class="metric"><strong>550<span>+</span></strong><p data-zh="内部工程师使用从零搭建的 K8s 批量推理平台" data-en="internal engineers served by a from-scratch K8s batch inference platform">内部工程师使用从零搭建的 K8s 批量推理平台</p></div><div class="metric"><strong>40<span>%</span> → 70<span>%+</span></strong><p data-zh="集群利用率得到系统性提升" data-en="systematic increase in cluster utilization">集群利用率得到系统性提升</p></div><div class="metric"><strong>6<span>h</span> → 20<span>m</span></strong><p data-zh="作业排队时间显著压缩" data-en="job queue time dramatically reduced">作业排队时间显著压缩</p></div></div><p class="source" data-zh="* 以上为核心团队成员曾在 Apple 等企业 AI/ML 基础设施部门取得的实测结果。" data-en="* Measured results achieved by core team members while at Apple and other companies' AI/ML infrastructure organizations.">* 以上为核心团队成员曾在 Apple 等企业 AI/ML 基础设施部门取得的实测结果。</p></div></section>
-  <section class="method"><div class="wrap"><div class="eyebrow" data-zh="合作方式" data-en="HOW WE ENGAGE">合作方式</div><h2 data-zh="先用数字建立信任，<br>再进入平台交付" data-en="Build trust with numbers.<br>Then deliver the platform.">先用数字建立信任，<br>再进入平台交付</h2><div class="steps"><div class="step"><span class="num">STEP 01</span><h3 data-zh="效率诊断" data-en="Assessment">效率诊断</h3><p data-zh="梳理集群、负载和推理链路，量化效率空间与优先级。" data-en="Map clusters, workloads and inference paths; quantify the opportunity.">梳理集群、负载和推理链路，量化效率空间与优先级。</p></div><div class="step"><span class="num">STEP 02</span><h3 data-zh="小范围试点" data-en="Scoped Pilot">小范围试点</h3><p data-zh="以可回滚、可测量的方式验证利用率、延迟与成本改善。" data-en="Validate utilization, latency and cost gains in a measurable, reversible pilot.">以可回滚、可测量的方式验证利用率、延迟与成本改善。</p></div><div class="step"><span class="num">STEP 03</span><h3 data-zh="平台级交付" data-en="Platform Delivery">平台级交付</h3><p data-zh="完成平台建设、迁移与长期优化，让能力留在客户现场。" data-en="Build, migrate and continuously optimize—the capability stays with the client.">完成平台建设、迁移与长期优化，让能力留在客户现场。</p></div></div><div class="disciplines"><div class="discipline"><b data-zh="不参与算力买卖" data-en="No compute trading">不参与算力买卖</b><span data-zh="立场独立，只对效率结果负责" data-en="Independent and accountable to efficiency">立场独立，只对效率结果负责</span></div><div class="discipline"><b data-zh="生产变更受控" data-en="Controlled production changes">生产变更受控</b><span data-zh="可观测、可回滚、边界清晰" data-en="Observable, reversible, bounded">可观测、可回滚、边界清晰</span></div><div class="discipline"><b data-zh="只引用实测数字" data-en="Measured numbers only">只引用实测数字</b><span data-zh="不包装尚未验证的项目结果" data-en="No unverified performance claims">不包装尚未验证的项目结果</span></div></div></div></section>
-  <section class="team" id="team"><div class="wrap"><div class="team-panel"><div class="eyebrow" data-zh="核心团队" data-en="CORE TEAM">核心团队</div><h2 data-zh="做过超大规模系统，<br>也能走进真实交付现场" data-en="Built at hyperscale.<br>Ready for real-world delivery.">做过超大规模系统，<br>也能走进真实交付现场</h2><p data-zh="核心团队来自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职责，长期深耕大规模训推平台、集群调度与推理系统。" data-en="Our core team comes from leading North American technology companies and open-source communities, with key AI/ML infrastructure roles at Apple and other enterprises across training, inference and scheduling systems.">核心团队来自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职责，长期深耕大规模训推平台、集群调度与推理系统。</p><div class="credentials"><span class="credential">AI/ML INFRASTRUCTURE</span><span class="credential">KUBERNETES AT SCALE</span><span class="credential">APACHE ECOSYSTEM</span><span class="credential">SGLANG CONTRIBUTOR</span><span class="credential">DOMESTIC DELIVERY</span></div></div></div></section>
-  <section class="contact" id="contact"><div class="wrap contact-grid"><div><div class="eyebrow" data-zh="开始合作" data-en="START A CONVERSATION">开始合作</div><h2 data-zh="你的 GPU，<br>还有多少<span>效率空间？</span>" data-en="How much more can<br>your GPUs <span>deliver?</span>">你的 GPU，<br>还有多少<span>效率空间？</span></h2><p data-zh="如果你拥有 GPU 集群、正在运行大模型推理，或准备建设企业 AI 平台，我们可以从一次不承诺、用数字说话的评估开始。" data-en="If you own GPU clusters, run LLM inference, or plan an enterprise AI platform, start with a no-commitment assessment grounded in numbers.">如果你拥有 GPU 集群、正在运行大模型推理，或准备建设企业 AI 平台，我们可以从一次不承诺、用数字说话的评估开始。</p></div><div class="contact-box"><small data-zh="商务合作" data-en="BUSINESS INQUIRIES">商务合作</small><strong data-zh="预约一次效率诊断 →" data-en="Book an efficiency assessment →">预约一次效率诊断 →</strong><div class="placeholder" data-zh="商务邮箱 / 联系二维码待补充" data-en="Business email / QR code coming soon">商务邮箱 / 联系二维码待补充</div></div></div></section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="aurora" aria-hidden="true"><b class="a1"></b><b class="a2"></b><b class="a3"></b></div>
+    <div class="wrap hero-grid">
+      <div class="reveal in">
+        <div class="eyebrow" data-zh="AI 基础设施工程公司" data-en="AI INFRASTRUCTURE ENGINEERING">AI 基础设施工程公司</div>
+        <h1 data-zh="把每一张卡，<br><span>变成可计价的产能</span>" data-en="Turn every GPU into<br><span>billable capacity.</span>">把每一张卡，<br><span>变成可计价的产能</span></h1>
+        <p class="hero-copy" data-zh="我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。<b>不卖算力，只释放效率。</b>" data-en="We engineer the layer between inference engines and cluster schedulers—turning compute into an operable resource. <b>We don't resell compute. We release efficiency.</b>">我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。<b>不卖算力，只释放效率。</b></p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact" data-zh="预约效率诊断 →" data-en="Book an assessment →">预约效率诊断 →</a>
+          <a class="btn secondary" href="#results" data-zh="查看工程实绩" data-en="View track record">查看工程实绩</a>
+        </div>
+        <div class="proof">
+          <span><i></i> GPU CLUSTER SCHEDULING</span>
+          <span><i></i> LLM INFERENCE</span>
+          <span><i></i> ENTERPRISE AI</span>
+        </div>
+      </div>
+
+      <div class="console reveal" aria-hidden="true">
+        <div class="console-top"><span><span class="dot"></span>CLUSTER · CONTROL PLANE</span><span data-zh="实时" data-en="LIVE">实时</span></div>
+        <div class="gauge">
+          <div class="ring"><b>72<s>%</s></b></div>
+          <div class="gauge-meta">
+            <small data-zh="集群利用率" data-en="UTILIZATION">集群利用率</small>
+            <p class="delta">40% → 72%+ &nbsp;·&nbsp; SLA HELD</p>
+            <p data-zh="训练 / 批量推理 / 在线推理，同集群混跑。" data-en="Training / batch / online inference, one cluster.">训练 / 批量推理 / 在线推理，同集群混跑。</p>
+          </div>
+        </div>
+        <div class="layers-mini">
+          <div class="lrow" style="--w:88%"><span class="tag">L03</span><span class="nm">INFERENCE</span><span class="bar"><i></i></span></div>
+          <div class="lrow" style="--w:72%"><span class="tag">L02</span><span class="nm">SCHEDULING</span><span class="bar"><i></i></span></div>
+          <div class="lrow" style="--w:64%"><span class="tag">L01</span><span class="nm">COMPUTE</span><span class="bar"><i></i></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNAL -->
+  <div class="signal"><div class="wrap">
+    <span><b>01</b> <em data-zh="生产级混合负载" data-en="Production mixed-load">生产级混合负载</em></span>
+    <span><b>02</b> <em data-zh="推理全链路优化" data-en="Full-path inference">推理全链路优化</em></span>
+    <span><b>03</b> <em data-zh="离线与信创交付" data-en="Air-gapped delivery">离线与信创交付</em></span>
+    <span><b>04</b> <em data-zh="国际主流 + 国产双栈" data-en="Dual-stack ready">国际主流 + 国产双栈</em></span>
+  </div></div>
+
+  <!-- THESIS -->
+  <section class="grain">
+    <div class="wrap thesis-grid">
+      <div class="reveal">
+        <div class="eyebrow" data-zh="时代判断" data-en="THE SHIFT">时代判断</div>
+        <p class="thesis-quote" data-zh="算力竞争，正从<em>“建得多”</em>转向<em>“用得好”</em>。" data-en="The compute race is shifting from <em>building more</em> to <em>running better.</em>">算力竞争，正从<em>“建得多”</em>转向<em>“用得好”</em>。</p>
+      </div>
+      <div class="shift-list reveal">
+        <div class="shift"><span class="num">01</span><div><h3 data-zh="推理成为主负载" data-en="Inference becomes the dominant workload">推理成为主负载</h3><p data-zh="负载结构日趋复杂，时延、吞吐与成本必须同时收敛。" data-en="Workloads are more complex; latency, throughput and cost must converge together.">负载结构日趋复杂，时延、吞吐与成本必须同时收敛。</p></div></div>
+        <div class="shift"><span class="num">02</span><div><h3 data-zh="供给扩张，效率承压" data-en="Supply grows; efficiency gets harder">供给扩张，效率承压</h3><p data-zh="智算中心密集投运，单纯扩容的边际回报持续下降。" data-en="As compute centers come online, hardware expansion alone yields diminishing returns.">智算中心密集投运，单纯扩容的边际回报持续下降。</p></div></div>
+        <div class="shift"><span class="num">03</span><div><h3 data-zh="利用率成为经营指标" data-en="Utilization becomes a business metric">利用率成为经营指标</h3><p data-zh="每一张卡是否持续产出，决定算力资产的真实回报。" data-en="Whether every GPU keeps producing defines the real return on compute assets.">每一张卡是否持续产出，决定算力资产的真实回报。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow" data-zh="三条服务线" data-en="THREE SERVICE LINES">三条服务线</div>
+        <h2 data-zh="从底层资源，到上层业务<br>贯穿 AI 生产链路" data-en="From infrastructure to outcomes,<br>across the AI production stack.">从底层资源，到上层业务<br>贯穿 AI 生产链路</h2>
+        <p class="lead" data-zh="不是标准化软件售卖，而是针对真实负载、真实集群和真实交付环境的工程服务。" data-en="Not off-the-shelf software—engineering for real workloads, real clusters and real deployment environments.">不是标准化软件售卖，而是针对真实负载、真实集群和真实交付环境的工程服务。</p>
+      </div>
+      <div class="service-grid">
+        <article class="card reveal"><span class="index">SERVICE / 01</span><div class="icon">∑</div><h3 data-zh="算力调度与<br>利用率提升" data-en="Scheduling &<br>Utilization">算力调度与<br>利用率提升</h3><p data-zh="把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。" data-en="Turn fragmented compute into an operable pool across training, batch and online inference.">把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。</p><ul><li>SLA-aware scheduling</li><li>Multi-tenant governance</li><li>Elastic reclaim & backfill</li></ul></article>
+        <article class="card reveal"><span class="index">SERVICE / 02</span><div class="icon">λ</div><h3 data-zh="大模型推理<br>部署与优化" data-en="LLM Inference<br>Optimization">大模型推理<br>部署与优化</h3><p data-zh="基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。" data-en="Optimize large-scale MoE and multi-GPU deployments across unit cost and tail latency.">基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。</p><ul><li>Engine & kernel tuning</li><li>Multi-GPU topology</li><li>Token economics</li></ul></article>
+        <article class="card reveal"><span class="index">SERVICE / 03</span><div class="icon">AI</div><h3 data-zh="企业 AI 平台<br>与智能体交付" data-en="Enterprise AI<br>Platforms & Agents">企业 AI 平台<br>与智能体交付</h3><p data-zh="面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。" data-en="Private, governable AI platforms and agents for enterprise, public sector and manufacturing.">面向政企与制造业，交付离线、信创兼容、可治理的私有化 AI 平台与业务智能体。</p><ul><li>Air-gapped deployment</li><li>Domestic-stack ready</li><li>Model-to-cluster delivery</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section id="technology" class="grain">
+    <div class="wrap">
+      <div class="stack-head reveal">
+        <div>
+          <div class="eyebrow" data-zh="技术壁垒" data-en="ENGINEERING MOAT">技术壁垒</div>
+          <h2 data-zh="不是单点工具，<br>而是全栈工程闭环" data-en="Not a point solution.<br>A full-stack engineering loop.">不是单点工具，<br>而是全栈工程闭环</h2>
+        </div>
+        <p class="lead" data-zh="从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿。" data-en="From inference request to allocation, execution, observability and continuous optimization.">从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿。</p>
+      </div>
+      <div class="layers reveal">
+        <div class="layer"><span class="tag">LAYER 04</span><h3 data-zh="业务与治理" data-en="Business & Governance">业务与治理</h3><p data-zh="企业 AI 平台、智能体、权限、审计与私有化交付" data-en="Enterprise platforms, agents, access, audit and private delivery">企业 AI 平台、智能体、权限、审计与私有化交付</p></div>
+        <div class="layer"><span class="tag">LAYER 03</span><h3 data-zh="推理服务" data-en="Inference Serving">推理服务</h3><p>vLLM · SGLang · MoE · KV Cache · Tail Latency</p></div>
+        <div class="layer"><span class="tag">LAYER 02</span><h3 data-zh="集群调度" data-en="Cluster Scheduling">集群调度</h3><p>YuniKorn · Kubernetes · Mixed Workloads · SLA</p></div>
+        <div class="layer"><span class="tag">LAYER 01</span><h3 data-zh="异构算力" data-en="Heterogeneous Compute">异构算力</h3><p data-zh="国际主流与国产算力双栈适配，覆盖异构部署" data-en="Dual-stack adaptation across mainstream global and domestic accelerators">国际主流与国产算力双栈适配，覆盖异构部署</p></div>
+      </div>
+      <div class="chips reveal">
+        <span class="chip">PRODUCTION SLA</span><span class="chip">AIR-GAPPED</span><span class="chip">APACHE DEPTH</span><span class="chip">DUAL-STACK</span><span class="chip">OPEN SOURCE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section id="results" class="metrics-band">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow" data-zh="工程实绩" data-en="PROVEN IN PRODUCTION">工程实绩</div>
+        <h2 data-zh="能力经过大规模<br>生产环境验证" data-en="Proven in large-scale<br>production environments.">能力经过大规模<br>生产环境验证</h2>
+      </div>
+      <div class="metric-grid reveal">
+        <div class="metric"><strong>550<s>+</s></strong><p data-zh="内部工程师使用从零搭建的 K8s 批量推理平台" data-en="internal engineers served by a from-scratch K8s batch inference platform">内部工程师使用从零搭建的 K8s 批量推理平台</p></div>
+        <div class="metric"><strong>40<s>%</s> → 70<s>%+</s></strong><p data-zh="集群利用率得到系统性提升" data-en="systematic increase in cluster utilization">集群利用率得到系统性提升</p></div>
+        <div class="metric"><strong>6<s>h</s> → 20<s>m</s></strong><p data-zh="作业排队时间显著压缩" data-en="job queue time dramatically reduced">作业排队时间显著压缩</p></div>
+      </div>
+      <p class="source reveal" data-zh="* 以上为核心团队成员曾在 Apple 等企业 AI/ML 基础设施部门取得的实测结果。" data-en="* Measured results achieved by core team members while at Apple and other companies' AI/ML infrastructure organizations.">* 以上为核心团队成员曾在 Apple 等企业 AI/ML 基础设施部门取得的实测结果。</p>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section>
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow" data-zh="合作方式" data-en="HOW WE ENGAGE">合作方式</div>
+        <h2 data-zh="先用数字建立信任，<br>再进入平台交付" data-en="Build trust with numbers.<br>Then deliver the platform.">先用数字建立信任，<br>再进入平台交付</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><span class="num">STEP 01</span><h3 data-zh="效率诊断" data-en="Assessment">效率诊断</h3><p data-zh="梳理集群、负载和推理链路，量化效率空间与优先级。" data-en="Map clusters, workloads and inference paths; quantify the opportunity.">梳理集群、负载和推理链路，量化效率空间与优先级。</p></div>
+        <div class="step"><span class="num">STEP 02</span><h3 data-zh="小范围试点" data-en="Scoped Pilot">小范围试点</h3><p data-zh="以可回滚、可测量的方式验证利用率、延迟与成本改善。" data-en="Validate utilization, latency and cost gains in a measurable, reversible pilot.">以可回滚、可测量的方式验证利用率、延迟与成本改善。</p></div>
+        <div class="step"><span class="num">STEP 03</span><h3 data-zh="平台级交付" data-en="Platform Delivery">平台级交付</h3><p data-zh="完成平台建设、迁移与长期优化，让能力留在客户现场。" data-en="Build, migrate and continuously optimize—the capability stays with the client.">完成平台建设、迁移与长期优化，让能力留在客户现场。</p></div>
+      </div>
+      <div class="disciplines reveal">
+        <div class="discipline"><b data-zh="不参与算力买卖" data-en="No compute trading">不参与算力买卖</b><span data-zh="立场独立，只对效率结果负责" data-en="Independent and accountable to efficiency">立场独立，只对效率结果负责</span></div>
+        <div class="discipline"><b data-zh="生产变更受控" data-en="Controlled production changes">生产变更受控</b><span data-zh="可观测、可回滚、边界清晰" data-en="Observable, reversible, bounded">可观测、可回滚、边界清晰</span></div>
+        <div class="discipline"><b data-zh="只引用实测数字" data-en="Measured numbers only">只引用实测数字</b><span data-zh="不包装尚未验证的项目结果" data-en="No unverified performance claims">不包装尚未验证的项目结果</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team" id="team">
+    <div class="wrap">
+      <div class="team-panel reveal">
+        <div class="eyebrow" data-zh="核心团队" data-en="CORE TEAM">核心团队</div>
+        <h2 data-zh="做过超大规模系统，<br>也能走进真实交付现场" data-en="Built at hyperscale.<br>Ready for real-world delivery.">做过超大规模系统，<br>也能走进真实交付现场</h2>
+        <p data-zh="核心团队来自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职责，长期深耕大规模训推平台、集群调度与推理系统。" data-en="Our core team comes from leading North American technology companies and open-source communities, with key AI/ML infrastructure roles at Apple and other enterprises across training, inference and scheduling systems.">核心团队来自北美一线科技企业与开源社区，曾在 Apple 等企业的 AI/ML 基础设施部门承担关键工程职责，长期深耕大规模训推平台、集群调度与推理系统。</p>
+        <div class="credentials">
+          <span class="credential">AI/ML INFRASTRUCTURE</span><span class="credential">KUBERNETES AT SCALE</span><span class="credential">APACHE ECOSYSTEM</span><span class="credential">SGLANG CONTRIBUTOR</span><span class="credential">DOMESTIC DELIVERY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="eyebrow" data-zh="开始合作" data-en="START A CONVERSATION">开始合作</div>
+        <h2 data-zh="你的 GPU，<br>还有多少<span>效率空间？</span>" data-en="How much more can<br>your GPUs <span>deliver?</span>">你的 GPU，<br>还有多少<span>效率空间？</span></h2>
+        <p data-zh="如果你拥有 GPU 集群、正在运行大模型推理，或准备建设企业 AI 平台，我们可以从一次不承诺、用数字说话的评估开始。" data-en="If you own GPU clusters, run LLM inference, or plan an enterprise AI platform, start with a no-commitment assessment grounded in numbers.">如果你拥有 GPU 集群、正在运行大模型推理，或准备建设企业 AI 平台，我们可以从一次不承诺、用数字说话的评估开始。</p>
+      </div>
+      <div class="contact-box reveal">
+        <small data-zh="商务合作" data-en="BUSINESS INQUIRIES">商务合作</small>
+        <strong data-zh="预约一次效率诊断 →" data-en="Book an efficiency assessment →">预约一次效率诊断 →</strong>
+        <div class="placeholder" data-zh="商务邮箱 / 联系二维码待补充" data-en="Business email / QR code coming soon">商务邮箱 / 联系二维码待补充</div>
+      </div>
+    </div>
+  </section>
 </main>
+
 <footer><div class="wrap foot"><span>深言速舟（宁波）智能科技有限公司</span><span>© 2026 SHENYAN SUZHOU · NINGBO, CHINA</span></div></footer>
-<script>let current='zh';const btn=document.getElementById('lang');btn.addEventListener('click',()=>{current=current==='zh'?'en':'zh';document.documentElement.lang=current==='zh'?'zh-CN':'en';document.querySelectorAll('[data-zh]').forEach(el=>el.innerHTML=el.dataset[current]);btn.textContent=current==='zh'?'EN':'中文';});</script>
+
+<script>
+  // language toggle
+  var current='zh', btn=document.getElementById('lang');
+  btn.addEventListener('click',function(){
+    current=current==='zh'?'en':'zh';
+    document.documentElement.lang=current==='zh'?'zh-CN':'en';
+    document.querySelectorAll('[data-zh]').forEach(function(el){el.innerHTML=el.dataset[current];});
+    btn.textContent=current==='zh'?'EN':'中文';
+  });
+  // sticky header state
+  var hdr=document.getElementById('hdr');
+  addEventListener('scroll',function(){hdr.classList.toggle('scrolled',scrollY>10);},{passive:true});
+  // scroll reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
 </body>
 </html>
