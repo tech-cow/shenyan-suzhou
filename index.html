@@ -134,6 +134,20 @@
     .fd-node.hot b{color:var(--hot)}
     .fd-d{font:12px/1.55 var(--mono);color:var(--ink-2)}
 
+    /* technology architecture diagram */
+    .arch{display:grid;grid-template-columns:40px 1fr 40px;gap:16px;margin-top:44px;align-items:stretch}
+    .arch-rail{display:flex;align-items:center;justify-content:center}
+    .arch-rail span{writing-mode:vertical-rl;text-orientation:mixed;font:600 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--faint)}
+    .arch-rail.left span{color:var(--hot)}
+    .arch-rail.right span{transform:rotate(180deg)}
+    .arch-stack{display:flex;flex-direction:column;gap:16px}
+    .arch-box{position:relative;border:1px solid var(--rule);border-radius:8px;background:#FCFBF8;padding:22px 26px;display:grid;grid-template-columns:52px 1fr;gap:22px;align-items:baseline;transition:.2s}
+    .arch-box:hover{border-color:var(--ink);background:#fff}
+    .arch-box .l{font:600 12px var(--mono);letter-spacing:.06em;color:var(--hot)}
+    .arch-box b{display:block;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:5px}
+    .arch-box p{margin:0;font:13px/1.5 var(--mono);color:var(--ink-2);letter-spacing:.01em}
+    .arch-box:not(:last-child):after{content:"";position:absolute;left:50%;bottom:-16px;width:1px;height:16px;background:var(--rule)}
+
     /* ecosystem */
     .eco{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
     .eco .wrap{display:flex;align-items:center;gap:16px 40px;padding:20px 0;flex-wrap:wrap}
@@ -244,6 +258,7 @@
       .res{gap:36px}
       .foot{grid-template-columns:1fr 1fr}.foot .brand{grid-column:1/-1}
       .hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{max-width:none}
+      .arch{grid-template-columns:1fr}.arch-rail{display:none}
       .p-main{grid-template-columns:1fr;gap:6px}.p-chart{height:80px}
       .fd-row{grid-template-columns:1fr}
       .fd-node{border-right:0;border-bottom:1px solid var(--rule)}.fd-node:last-child{border-bottom:0}
@@ -391,11 +406,15 @@
       <h2 data-zh="不是单点工具，而是全栈工程闭环。" data-en="Not a point tool — a full-stack engineering loop.">不是单点工具，而是全栈工程闭环。</h2>
       <p class="lead" data-zh="从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿这四层。" data-en="From inference request to allocation, execution, observability and continuous optimization — across all four layers.">从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿这四层。</p>
     </div>
-    <div class="stack rv">
-      <div class="layer"><span class="l">L04</span><h3 class="serif" data-zh="业务与治理" data-en="Business & governance">业务与治理</h3><p data-zh="企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付" data-en="Platforms · agents · access · audit · private delivery">企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付</p></div>
-      <div class="layer"><span class="l">L03</span><h3 class="serif" data-zh="推理服务" data-en="Inference serving">推理服务</h3><p>vLLM · SGLang · MoE · KV Cache · Tail Latency</p></div>
-      <div class="layer"><span class="l">L02</span><h3 class="serif" data-zh="集群调度" data-en="Cluster scheduling">集群调度</h3><p>YuniKorn · Kubernetes · Mixed Workloads · SLA</p></div>
-      <div class="layer"><span class="l">L01</span><h3 class="serif" data-zh="异构算力" data-en="Heterogeneous compute">异构算力</h3><p data-zh="国际主流与国产算力双栈适配 · 覆盖异构部署" data-en="Dual-stack across mainstream global and domestic accelerators">国际主流与国产算力双栈适配 · 覆盖异构部署</p></div>
+    <div class="arch rv">
+      <div class="arch-rail left"><span data-zh="推理请求 ↓ 逐层下发" data-en="Request ↓ flows down">推理请求 ↓ 逐层下发</span></div>
+      <div class="arch-stack">
+        <div class="arch-box"><span class="l">L04</span><div><b class="serif" data-zh="业务与治理" data-en="Business & governance">业务与治理</b><p data-zh="企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付" data-en="Platforms · agents · access · audit · private delivery">企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付</p></div></div>
+        <div class="arch-box"><span class="l">L03</span><div><b class="serif" data-zh="推理服务" data-en="Inference serving">推理服务</b><p>vLLM · SGLang · MoE · KV Cache · Tail Latency</p></div></div>
+        <div class="arch-box"><span class="l">L02</span><div><b class="serif" data-zh="集群调度" data-en="Cluster scheduling">集群调度</b><p>YuniKorn · Kubernetes · Mixed Workloads · SLA</p></div></div>
+        <div class="arch-box"><span class="l">L01</span><div><b class="serif" data-zh="异构算力" data-en="Heterogeneous compute">异构算力</b><p data-zh="国际主流与国产算力双栈适配 · 覆盖异构部署" data-en="Dual-stack across mainstream global and domestic accelerators">国际主流与国产算力双栈适配 · 覆盖异构部署</p></div></div>
+      </div>
+      <div class="arch-rail right"><span data-zh="遥测观测 ↑ 持续优化" data-en="Telemetry ↑ loops up">遥测观测 ↑ 持续优化</span></div>
     </div>
     <div class="chips rv"><span>PRODUCTION SLA</span><span>AIR-GAPPED</span><span>APACHE DEPTH</span><span>DUAL-STACK</span><span>OPEN SOURCE</span></div>
   </div></section>
