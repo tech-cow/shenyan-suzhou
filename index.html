@@ -21,8 +21,8 @@
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-snap-type:y proximity}
     body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-    /* snap targets; only the statement sections are full-height (.hero/.thesis/.contact) */
-    main>section{position:relative;scroll-snap-align:start}
+    /* every section is a full-viewport, vertically-centered page */
+    main>section{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;position:relative;scroll-snap-align:start}
     footer{scroll-snap-align:start}
     a{color:inherit;text-decoration:none}
     button{font:inherit;color:inherit}
@@ -134,19 +134,37 @@
     .fd-node.hot b{color:var(--hot)}
     .fd-d{font:12px/1.55 var(--mono);color:var(--ink-2)}
 
+    /* agent hub-and-spoke diagram */
+    .agentviz{margin:44px auto 0;max-width:940px;position:relative}
+    .av-caps{display:flex;justify-content:center;gap:20px;margin-bottom:46px;position:relative}
+    .av-cap{border:1px solid var(--rule);border-radius:8px;background:#FCFBF8;padding:14px 24px;text-align:center;min-width:190px}
+    .av-cap b{display:block;font-size:16px;color:var(--ink)}
+    .av-cap .av-d{font:11px var(--mono);color:var(--ink-2)}
+    .av-caps:after{content:"";position:absolute;left:50%;bottom:-46px;width:1px;height:46px;background:var(--rule)}
+    .av-flow{display:grid;grid-template-columns:1fr auto 1.3fr auto 1fr;gap:14px;align-items:center}
+    .av-node,.av-hub{border:1px solid var(--rule);border-radius:10px;background:#FCFBF8;padding:24px 20px;text-align:center;position:relative}
+    .av-hub{border-color:var(--hot);background:#FBF1EE;box-shadow:0 0 0 5px rgba(203,58,27,.05);padding:30px 22px}
+    .av-k{font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+    .av-hub .av-k{color:var(--hot)}
+    .av-node b,.av-hub b{display:block;font-size:18px;font-weight:400;color:var(--ink);margin:9px 0 6px}
+    .av-hub b{font-size:22px;color:var(--hot)}
+    .av-node .av-d,.av-hub .av-d{font:11.5px/1.5 var(--mono);color:var(--ink-2)}
+    .av-arr{color:var(--hot);font:15px var(--mono);text-align:center}
+    .av-loop{margin-top:28px;text-align:center;font:11px var(--mono);letter-spacing:.08em;color:var(--faint);position:relative;padding-top:22px}
+    .av-loop:before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:repeating-linear-gradient(90deg,var(--rule) 0,var(--rule) 5px,transparent 5px,transparent 10px)}
+
     /* technology architecture diagram */
     .arch{display:grid;grid-template-columns:40px 1fr 40px;gap:16px;margin-top:44px;align-items:stretch}
     .arch-rail{display:flex;align-items:center;justify-content:center}
     .arch-rail span{writing-mode:vertical-rl;text-orientation:mixed;font:600 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--faint)}
     .arch-rail.left span{color:var(--hot)}
-    .arch-rail.right span{transform:rotate(180deg)}
     .arch-stack{display:flex;flex-direction:column;gap:16px}
-    .arch-box{position:relative;border:1px solid var(--rule);border-radius:8px;background:#FCFBF8;padding:22px 26px;display:grid;grid-template-columns:52px 1fr;gap:22px;align-items:baseline;transition:.2s}
-    .arch-box:hover{border-color:var(--ink);background:#fff}
+    .arch-box{position:relative;border:1px solid var(--rule);border-left:2px solid rgba(203,58,27,.45);border-radius:8px;background:#FCFBF8;padding:22px 26px;display:grid;grid-template-columns:52px 1fr;gap:22px;align-items:baseline;transition:.2s}
+    .arch-box:hover{border-color:var(--ink);border-left-color:var(--hot);background:#fff;transform:translateX(3px)}
     .arch-box .l{font:600 12px var(--mono);letter-spacing:.06em;color:var(--hot)}
     .arch-box b{display:block;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:5px}
     .arch-box p{margin:0;font:13px/1.5 var(--mono);color:var(--ink-2);letter-spacing:.01em}
-    .arch-box:not(:last-child):after{content:"";position:absolute;left:50%;bottom:-16px;width:1px;height:16px;background:var(--rule)}
+    .arch-box:not(:last-child):after{content:"▼";position:absolute;left:26px;bottom:-14px;transform:translateX(-50%);color:rgba(203,58,27,.5);font-size:9px;line-height:1;z-index:1}
 
     /* ecosystem */
     .eco{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -175,6 +193,16 @@
     .aud .col p{color:var(--ink-2);font-size:14.5px;margin:0 0 16px;min-height:44px}
     .aud .col .g{font:12px var(--mono);color:var(--ink)}
     .aud .col .g b{color:var(--hot);font-weight:500}
+    .aud .stat{margin:2px 0 20px}
+    .stat-l{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:11px var(--mono);color:var(--ink-2);letter-spacing:.03em;margin-bottom:9px}
+    .stat-l b{color:var(--ink);font-weight:600}
+    .stat-l b.hotv{color:var(--hot)}
+    .stat-bar{position:relative;height:8px;background:var(--paper-2);border-radius:2px}
+    .stat-bar i{position:absolute;left:0;top:0;height:100%;background:var(--ink);border-radius:2px}
+    .stat-bar u{position:absolute;top:0;height:100%;border-radius:2px;background:repeating-linear-gradient(90deg,var(--hot) 0,var(--hot) 3px,transparent 3px,transparent 6px)}
+    .stat-bar s{position:absolute;top:-3px;width:2px;height:14px;background:var(--hot)}
+    .stat-bar.cells{display:flex;gap:4px;background:none}
+    .stat-bar.cells i{position:static;flex:1;background:var(--ink)}
 
     /* services — editorial list, no decorative numbers */
     .svc{display:grid;grid-template-columns:minmax(240px,.9fr) 1.35fr minmax(200px,.75fr);gap:20px 48px;padding:38px 0;border-top:1px solid var(--rule);align-items:start}
@@ -245,10 +273,10 @@
     .foot-b{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid var(--rule);color:var(--faint);font:11px var(--mono);letter-spacing:.04em}
 
     /* relax paging where a screen can't hold a section */
-    @media(max-height:760px){html{scroll-snap-type:none}.hero,.thesis,.contact{min-height:auto}}
+    @media(max-height:820px){html{scroll-snap-type:none}main>section{min-height:auto}}
     @media(max-width:900px){
       html{scroll-snap-type:none}
-      .hero,.thesis,.contact{min-height:auto}
+      main>section{min-height:auto}
       .navmid{display:none}
       .aud,.res,.team-grid,.steps,.contact-row{grid-template-columns:1fr}
       .aud .col{border-right:0;border-bottom:1px solid var(--rule)}.aud .col:last-child{border-bottom:0}
@@ -259,6 +287,7 @@
       .foot{grid-template-columns:1fr 1fr}.foot .brand{grid-column:1/-1}
       .hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{max-width:none}
       .arch{grid-template-columns:1fr}.arch-rail{display:none}
+      .av-flow{grid-template-columns:1fr;gap:10px}.av-arr{transform:rotate(90deg)}.av-caps{flex-direction:column;gap:12px}.av-caps:after{display:none}
       .p-main{grid-template-columns:1fr;gap:6px}.p-chart{height:80px}
       .fd-row{grid-template-columns:1fr}
       .fd-node{border-right:0;border-bottom:1px solid var(--rule)}.fd-node:last-child{border-bottom:0}
@@ -299,7 +328,7 @@
   <!-- HERO -->
   <section class="hero"><div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="kicker" data-zh="AI 基础设施工程 · 宁波" data-en="AI Infrastructure Engineering · Ningbo">AI 基础设施工程 · 宁波</span>
+      <span class="kicker" data-zh="AI 基础设施工程" data-en="AI Infrastructure Engineering">AI 基础设施工程</span>
       <h1><span class="word" style="animation-delay:.12s" data-zh="把每一张卡，" data-en="Turn every GPU">把每一张卡，</span><br><span class="word" style="animation-delay:.26s" data-zh="变成<em>可计价</em>的产能。" data-en="into <em>billable</em> capacity.">变成<em>可计价</em>的产能。</span></h1>
       <p class="lead" data-zh="我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。" data-en="We engineer the layer between inference engines and cluster schedulers — turning compute into an operable resource. We don't resell compute; we release efficiency.">我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。</p>
       <div class="readout">
@@ -346,9 +375,9 @@
       <h2 data-zh="无论你在链路的哪一端，我们都从效率进入。" data-en="Wherever you sit in the stack, we enter through efficiency.">无论你在链路的哪一端，我们都从效率进入。</h2>
     </div>
     <div class="aud rv">
-      <div class="col"><div class="t" data-zh="算力持有方" data-en="Compute owners">算力持有方</div><h3 class="serif" data-zh="有卡，用不满" data-en="Cards, underused">有卡，用不满</h3><p data-zh="智算中心、GPU 云、企业自建集群——分散、闲置、难以运营。" data-en="Compute centers, GPU clouds and self-built clusters — fragmented, idle, hard to operate.">智算中心、GPU 云、企业自建集群——分散、闲置、难以运营。</p><div class="g" data-zh="目标 · <b>利用率与 SLA</b>" data-en="Goal · <b>utilization & SLA</b>">目标 · <b>利用率与 SLA</b></div></div>
-      <div class="col"><div class="t" data-zh="模型落地方" data-en="Model builders">模型落地方</div><h3 class="serif" data-zh="在跑，成本高" data-en="Running, costly">在跑，成本高</h3><p data-zh="正在跑大模型推理的团队——单位成本高、尾延迟不稳。" data-en="Teams running LLM inference — high unit cost and unstable tail latency.">正在跑大模型推理的团队——单位成本高、尾延迟不稳。</p><div class="g" data-zh="目标 · <b>降本与稳延迟</b>" data-en="Goal · <b>lower cost, stable latency</b>">目标 · <b>降本与稳延迟</b></div></div>
-      <div class="col"><div class="t" data-zh="政企与制造" data-en="Enterprise & mfg">政企与制造</div><h3 class="serif" data-zh="要落地，可治理" data-en="Deploy, govern">要落地，可治理</h3><p data-zh="需要离线、信创兼容、可治理的私有化 AI 平台与业务智能体。" data-en="Needing air-gapped, domestic-stack, governable private AI platforms and agents.">需要离线、信创兼容、可治理的私有化 AI 平台与业务智能体。</p><div class="g" data-zh="目标 · <b>可落地、可治理</b>" data-en="Goal · <b>deployable & governable</b>">目标 · <b>可落地、可治理</b></div></div>
+      <div class="col"><div class="t" data-zh="算力持有方" data-en="Compute owners">算力持有方</div><h3 class="serif" data-zh="有卡，用不满" data-en="Cards, underused">有卡，用不满</h3><p data-zh="智算中心、GPU 云、企业自建集群——分散、闲置、难以运营。" data-en="Compute centers, GPU clouds and self-built clusters — fragmented, idle, hard to operate.">智算中心、GPU 云、企业自建集群——分散、闲置、难以运营。</p><div class="stat"><div class="stat-l"><span data-zh="集群利用率" data-en="Utilization">集群利用率</span><b>40% → 72%</b></div><div class="stat-bar"><i style="width:72%"></i><s style="left:40%"></s></div></div><div class="g" data-zh="目标 · <b>利用率与 SLA</b>" data-en="Goal · <b>utilization & SLA</b>">目标 · <b>利用率与 SLA</b></div></div>
+      <div class="col"><div class="t" data-zh="模型落地方" data-en="Model builders">模型落地方</div><h3 class="serif" data-zh="在跑，成本高" data-en="Running, costly">在跑，成本高</h3><p data-zh="正在跑大模型推理的团队——单位成本高、尾延迟不稳。" data-en="Teams running LLM inference — high unit cost and unstable tail latency.">正在跑大模型推理的团队——单位成本高、尾延迟不稳。</p><div class="stat"><div class="stat-l"><span data-zh="单位推理成本" data-en="Unit cost">单位推理成本</span><b class="hotv">−36%</b></div><div class="stat-bar"><i style="width:64%"></i><u style="left:64%;width:36%"></u></div></div><div class="g" data-zh="目标 · <b>降本与稳延迟</b>" data-en="Goal · <b>lower cost, stable latency</b>">目标 · <b>降本与稳延迟</b></div></div>
+      <div class="col"><div class="t" data-zh="政企与制造" data-en="Enterprise & mfg">政企与制造</div><h3 class="serif" data-zh="要落地，可治理" data-en="Deploy, govern">要落地，可治理</h3><p data-zh="需要离线、信创兼容、可治理的私有化 AI 平台与业务智能体。" data-en="Needing air-gapped, domestic-stack, governable private AI platforms and agents.">需要离线、信创兼容、可治理的私有化 AI 平台与业务智能体。</p><div class="stat"><div class="stat-l"><span data-zh="私有化就绪" data-en="Deploy-ready">私有化就绪</span><b data-zh="离线 · 信创 · 可审计" data-en="Air-gap · domestic · audit">离线 · 信创 · 可审计</b></div><div class="stat-bar cells"><i></i><i></i><i></i></div></div><div class="g" data-zh="目标 · <b>可落地、可治理</b>" data-en="Goal · <b>deployable & governable</b>">目标 · <b>可落地、可治理</b></div></div>
     </div>
   </div></section>
 
@@ -389,13 +418,19 @@
       <h2 data-zh="让大模型，真正在业务里干活。" data-en="Put the model to work inside the business.">让大模型，真正在业务里干活。</h2>
       <p class="lead" data-zh="不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。" data-en="Not another chatbox — business agents wired into knowledge bases, tools and enterprise systems for real manufacturing and public-sector workflows; private and auditable.">不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。</p>
     </div>
-    <div class="flow-diagram rv">
-      <div class="fd-row">
-        <div class="fd-node"><span class="fd-k">01</span><b class="serif" data-zh="业务触发" data-en="Trigger">业务触发</b><span class="fd-d" data-zh="用户 / 业务系统 / 事件" data-en="User / system / event">用户 / 业务系统 / 事件</span></div>
-        <div class="fd-node hot"><span class="fd-k">02</span><b class="serif" data-zh="Agent 编排" data-en="Orchestration">Agent 编排</b><span class="fd-d" data-zh="任务规划 · 调度知识与工具" data-en="Plan · route knowledge & tools">任务规划 · 调度知识与工具</span></div>
-        <div class="fd-node"><span class="fd-k">03</span><b class="serif" data-zh="推理 · 检索 · 调用" data-en="Reason · retrieve · act">推理 · 检索 · 调用</b><span class="fd-d" data-zh="大模型 · 知识库 RAG · 工具/系统" data-en="LLM · RAG · tools / systems">大模型 · 知识库 RAG · 工具/系统</span></div>
-        <div class="fd-node"><span class="fd-k">04</span><b class="serif" data-zh="回写业务" data-en="Write back">回写业务</b><span class="fd-d" data-zh="结果落到系统 · 全程可审计" data-en="Results into systems · fully auditable">结果落到系统 · 全程可审计</span></div>
+    <div class="agentviz rv">
+      <div class="av-caps">
+        <div class="av-cap"><b class="serif" data-zh="知识库 · RAG" data-en="Knowledge · RAG">知识库 · RAG</b><span class="av-d" data-zh="检索企业知识" data-en="Retrieve knowledge">检索企业知识</span></div>
+        <div class="av-cap"><b class="serif" data-zh="工具 · 企业系统" data-en="Tools · Systems">工具 · 企业系统</b><span class="av-d" data-zh="调用与写入" data-en="Call & write">调用与写入</span></div>
       </div>
+      <div class="av-flow">
+        <div class="av-node"><span class="av-k">01</span><b class="serif" data-zh="业务触发" data-en="Trigger">业务触发</b><span class="av-d" data-zh="用户 / 系统 / 事件" data-en="User / system / event">用户 / 系统 / 事件</span></div>
+        <span class="av-arr">→</span>
+        <div class="av-hub"><span class="av-k" data-zh="核心" data-en="Core">核心</span><b class="serif" data-zh="Agent 编排" data-en="Agent core">Agent 编排</b><span class="av-d" data-zh="大模型 · 规划 · 推理 · 决策" data-en="LLM · plan · reason · decide">大模型 · 规划 · 推理 · 决策</span></div>
+        <span class="av-arr">→</span>
+        <div class="av-node"><span class="av-k">02</span><b class="serif" data-zh="回写业务" data-en="Write back">回写业务</b><span class="av-d" data-zh="结果落系统 · 可审计" data-en="Into systems · auditable">结果落系统 · 可审计</span></div>
+      </div>
+      <div class="av-loop"><span data-zh="闭环 · 结果回流，持续自动化" data-en="Closed loop · results feed back, continuous automation">闭环 · 结果回流，持续自动化</span></div>
     </div>
   </div></section>
 
