@@ -291,7 +291,9 @@
     .agc .ico{width:38px;height:38px;background:rgba(255,255,255,.6)}
     .agc .ico svg{width:18px;height:18px}
     .agc b{display:block;font:400 15.5px var(--serif);color:var(--c)}
-    .agc span{display:block;font:11px/1.55 var(--mono);color:var(--ink-2);margin-top:4px}
+    /* :not(.ico) — the medallion is a <span> too, and a bare `span` rule would
+       out-specify .ico{display:grid} and knock the icon out of centre */
+    .agc span:not(.ico){display:block;font:11px/1.55 var(--mono);color:var(--ink-2);margin-top:4px}
     .ag-runtime{position:relative;margin-top:52px;border:1px solid var(--rule);border-radius:14px;background:rgba(252,251,248,.72);
       box-shadow:var(--shadow);padding:34px 26px 24px}
     .ag-rt-title{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 16px;
@@ -303,7 +305,7 @@
     .ag-step .ico svg{width:23px;height:23px}
     .ag-step .sn{display:block;font:600 9.5px var(--mono);letter-spacing:.1em;color:var(--c);margin:11px 0 3px}
     .ag-step b{display:block;font:400 15.5px var(--serif);color:var(--ink)}
-    .ag-step span{display:block;font:10.5px/1.5 var(--mono);color:var(--faint);margin-top:4px}
+    .ag-step span:not(.ico){display:block;font:10.5px/1.5 var(--mono);color:var(--faint);margin-top:4px}
     .ag-loop{margin-top:24px;padding-top:16px;position:relative;text-align:center;
       font:10.5px var(--mono);letter-spacing:.1em;color:var(--faint)}
     .ag-loop:before{content:"";position:absolute;top:0;left:9%;right:9%;height:11px;
@@ -567,7 +569,7 @@
           </div>
           <div class="stage k2" id="sv2">
             <div class="stage-h">
-              <span class="ico k2"><svg viewBox="0 0 24 24"><path d="M3 17l4.5-5 3.5 3.5L20 6"/><path d="M15 6h5v5"/></svg></span>
+              <span class="ico k2"><svg viewBox="-0.5 -0.5 24 24"><path d="M3 17l4.5-5 3.5 3.5L20 6"/><path d="M15 6h5v5"/></svg></span>
               <div><span class="stage-n">02</span><h3 class="serif" data-zh="推理优化" data-en="Inference">推理优化</h3></div>
             </div>
             <p data-zh="基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。" data-en="On vLLM / SGLang — converging unit cost and tail latency for MoE and multi-GPU.">基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。</p>
@@ -714,11 +716,11 @@
             <div><b data-zh="目标 · 意图" data-en="Goal · intent">目标 · 意图</b><span data-zh="明确要完成什么" data-en="What must get done">明确要完成什么</span></div>
           </div>
           <div class="agc k3" id="agKnow">
-            <span class="ico k3"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M8 7.5h7M8 11h5"/></svg></span>
+            <span class="ico k3"><svg viewBox="-0.5 -0.25 24 24"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M8 7.5h7M8 11h5"/></svg></span>
             <div><b data-zh="知识库 · RAG" data-en="Knowledge · RAG">知识库 · RAG</b><span data-zh="检索企业知识" data-en="Retrieve context">检索企业知识</span></div>
           </div>
           <div class="agc k2" id="agTool">
-            <span class="ico k2"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 01-5.1 5.1l-5.3 5.3a1.8 1.8 0 002.5 2.5l5.3-5.3a4 4 0 015.1-5.1l-2.4 2.4-1.4-1.4z"/></svg></span>
+            <span class="ico k2"><svg viewBox="-1.41 0.91 24 24"><path d="M14.7 6.3a4 4 0 01-5.1 5.1l-5.3 5.3a1.8 1.8 0 002.5 2.5l5.3-5.3a4 4 0 015.1-5.1l-2.4 2.4-1.4-1.4z"/></svg></span>
             <div><b data-zh="工具 · 企业系统" data-en="Tools · systems">工具 · 企业系统</b><span data-zh="调用与写入" data-en="Call & write">调用与写入</span></div>
           </div>
         </div>
@@ -727,19 +729,19 @@
           <span class="ag-rt-title serif"><s data-zh="核心" data-en="Core">核心</s><span data-zh="Agent 运行流程" data-en="Agent runtime loop">Agent 运行流程</span></span>
           <div class="ag-steps">
             <div class="ag-step k1" id="agS1">
-              <span class="ico k1" id="agI1"><svg viewBox="0 0 24 24"><path d="M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6"/><path d="M3 12h5l1.5 2.5h5L16 12h5"/><path d="M12 3v8M9 8l3 3 3-3"/></svg></span>
+              <span class="ico k1" id="agI1"><svg viewBox="0 -0.5 24 24"><path d="M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6"/><path d="M3 12h5l1.5 2.5h5L16 12h5"/><path d="M12 3v8M9 8l3 3 3-3"/></svg></span>
               <span class="sn">01</span><b class="serif" data-zh="接收输入" data-en="Receive">接收输入</b><span data-zh="用户 / 系统 / 事件" data-en="User / system / event">用户 / 系统 / 事件</span>
             </div>
             <div class="ag-step k5" id="agS2">
-              <span class="ico k5" id="agI2"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h13M4 18h7"/><path d="M17.5 17.5l2 2 3.5-3.5"/></svg></span>
+              <span class="ico k5" id="agI2"><svg viewBox="1.5 0.75 24 24"><path d="M4 6h10M4 12h13M4 18h7"/><path d="M17.5 17.5l2 2 3.5-3.5"/></svg></span>
               <span class="sn">02</span><b class="serif" data-zh="思考规划" data-en="Plan">思考规划</b><span data-zh="拆解可执行步骤" data-en="Decompose steps">拆解可执行步骤</span>
             </div>
             <div class="ag-step k3" id="agS3">
-              <span class="ico k3" id="agI3"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/><path d="M8 10.5h5"/></svg></span>
+              <span class="ico k3" id="agI3"><svg viewBox="0.5 0.5 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/><path d="M8 10.5h5"/></svg></span>
               <span class="sn">03</span><b class="serif" data-zh="检索推理" data-en="Retrieve">检索推理</b><span data-zh="知识库 + 大模型决策" data-en="RAG + LLM decides">知识库 + 大模型决策</span>
             </div>
             <div class="ag-step k2" id="agS4">
-              <span class="ico k2" id="agI4"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9z"/></svg></span>
+              <span class="ico k2" id="agI4"><svg viewBox="-0.8 0 24 24"><path d="M5 3l14 9-14 9z"/></svg></span>
               <span class="sn">04</span><b class="serif" data-zh="调用执行" data-en="Act">调用执行</b><span data-zh="工具与企业系统" data-en="Tools & systems">工具与企业系统</span>
             </div>
             <div class="ag-step k4" id="agS5">
