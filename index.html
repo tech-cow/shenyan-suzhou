@@ -145,9 +145,25 @@
               mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
     .mq-track{display:flex;width:max-content;animation:mq 34s linear infinite}
     .marquee:hover .mq-track{animation-play-state:paused}
-    .mq-track ul{list-style:none;display:flex;gap:44px;margin:0;padding:0 22px}
-    .mq-track li{font:400 15px var(--mono);color:var(--ink-2);white-space:nowrap}
+    .mq-track ul{list-style:none;display:flex;gap:40px;margin:0;padding:0 20px}
+    .mq-track li{display:flex;align-items:center;gap:10px;font:400 15px var(--mono);color:var(--ink-2);white-space:nowrap;transition:color .2s}
+    .mq-track li:hover{color:var(--hot)}
     @keyframes mq{to{transform:translateX(-50%)}}
+
+    /* ---- brand logos: official marks, unified to one ink via alpha mask ---- */
+    .lg{display:inline-block;flex:none;background-color:currentColor;
+      -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+      -webkit-mask-position:center;mask-position:center;
+      -webkit-mask-size:contain;mask-size:contain}
+    .mq-track .lg{width:20px;height:20px;opacity:.8}
+    .lg-kubernetes{-webkit-mask-image:url(assets/logos/kubernetes.svg);mask-image:url(assets/logos/kubernetes.svg)}
+    .lg-yunikorn{-webkit-mask-image:url(assets/logos/yunikorn.png);mask-image:url(assets/logos/yunikorn.png)}
+    .lg-vllm{-webkit-mask-image:url(assets/logos/vllm.svg);mask-image:url(assets/logos/vllm.svg)}
+    .lg-sglang{-webkit-mask-image:url(assets/logos/sglang.png);mask-image:url(assets/logos/sglang.png)}
+    .lg-ray{-webkit-mask-image:url(assets/logos/ray.svg);mask-image:url(assets/logos/ray.svg)}
+    .lg-prometheus{-webkit-mask-image:url(assets/logos/prometheus.svg);mask-image:url(assets/logos/prometheus.svg)}
+    .lg-nvidia{-webkit-mask-image:url(assets/logos/nvidia.svg);mask-image:url(assets/logos/nvidia.svg)}
+    .lg-huawei{-webkit-mask-image:url(assets/logos/huawei.svg);mask-image:url(assets/logos/huawei.svg)}
 
     /* ---- thesis band ---- */
     .thesis{padding:112px 0;border-bottom:1px solid var(--rule)}
@@ -162,7 +178,11 @@
     .card-ico svg{width:18px;height:18px;stroke:var(--hot);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .card h3{font-size:21px;margin-bottom:9px}
     .card>p{color:var(--ink-2);font-size:14.5px;line-height:1.65;margin:0 0 18px}
-    .card ul{list-style:none;margin:0 0 20px;padding:0;border-top:1px solid var(--rule-2);padding-top:14px}
+    .card ul{list-style:none;margin:0 0 18px;padding:0;border-top:1px solid var(--rule-2);padding-top:14px}
+    .card-tech{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;margin-bottom:20px}
+    .card-tech .ct-l{font:9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+    .card-tech .ct-i{display:flex;align-items:center;gap:6px;font:11.5px var(--mono);color:var(--ink-2)}
+    .card-tech .lg{width:15px;height:15px;opacity:.8}
     .card li{font:12px/1.6 var(--mono);color:var(--ink-2);padding:4px 0;padding-left:15px;position:relative}
     .card li:before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--hot);opacity:.5}
 
@@ -211,54 +231,70 @@
     .stat-bar.cells{display:flex;gap:4px;background:none}
     .stat-bar.cells i{position:static;flex:1;background:var(--ink)}
 
-    /* ---- stripe-style flow diagram ---- */
-    .flow{margin-top:52px}
-    .flow-caps{display:flex;justify-content:center;gap:18px;margin-bottom:14px}
-    .node{border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:18px 20px;text-align:center;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
-    .node:hover{border-color:#C4C1B6;box-shadow:var(--shadow-lg)}
-    .node .nk{display:block;font:600 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-    .node b{display:block;font:400 17px var(--serif);color:var(--ink);margin:8px 0 5px}
-    .node .nd{display:block;font:11.5px/1.5 var(--mono);color:var(--ink-2)}
-    .node.hub{border-color:rgba(203,58,27,.4);background:var(--hot-wash);box-shadow:0 0 0 5px rgba(203,58,27,.05),var(--shadow);padding:26px 22px}
-    .node.hub .nk{color:var(--hot)}
-    .node.hub b{font-size:21px;color:var(--hot)}
-    .flow-row{display:grid;grid-template-columns:1fr 68px 1.25fr 68px 1fr;align-items:center}
-    /* connector: hairline + a dot that travels along it (stripe idiom) */
-    .conn{display:block;position:relative;height:1px;background:var(--rule)}
-    .conn:after{content:"";position:absolute;top:50%;left:0;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 3px rgba(203,58,27,.14);animation:travel 2.6s cubic-bezier(.55,0,.45,1) infinite}
-    .conn.d2:after{animation-delay:.55s}
-    .conn.d3:after{animation-delay:1.1s}
-    @keyframes travel{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
-    .conn-v{position:relative;width:1px;height:44px;background:var(--rule);margin:0 auto}
-    .conn-v:after{content:"";position:absolute;left:50%;top:0;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 3px rgba(203,58,27,.14);animation:travelV 2.6s cubic-bezier(.55,0,.45,1) infinite}
-    .conn-v.up:after{animation:travelVup 2.6s cubic-bezier(.55,0,.45,1) infinite}
-    @keyframes travelV{0%{top:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
-    @keyframes travelVup{0%{top:100%;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:0;opacity:0}}
-    .flow-loop{margin-top:26px;text-align:center;font:11px var(--mono);letter-spacing:.08em;color:var(--faint);position:relative;padding-top:22px}
-    .flow-loop:before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:repeating-linear-gradient(90deg,var(--rule) 0,var(--rule) 5px,transparent 5px,transparent 10px)}
+    /* ---- diagram engine: HTML nodes + SVG wires measured from the real layout ---- */
+    .dg{position:relative;margin-top:56px}
+    .dg-wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+    .dg-wires .wire{fill:none;stroke:#C2BFB4;stroke-width:1.5;stroke-linecap:round}
+    .dg-wires .wire.dash{stroke-dasharray:5 5;stroke:#CFCCC2}
+    .dg-wires .pulse{fill:var(--hot)}
+    .dg-layer{position:relative;z-index:1}
 
-    /* ---- architecture stack ---- */
-    .arch{display:grid;grid-template-columns:44px 1fr 44px;gap:18px;margin-top:48px}
+    .node{border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:16px 18px;text-align:center;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s,transform .2s}
+    .node:hover{border-color:#C4C1B6;box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+    .node .nk{display:block;font:600 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+    .node b{display:block;font:400 17px var(--serif);color:var(--ink);margin:7px 0 4px}
+    .node .nd{display:block;font:11.5px/1.5 var(--mono);color:var(--ink-2)}
+
+    /* agent runtime */
+    .ag-grid{display:grid;grid-template-columns:minmax(140px,.85fr) 1.05fr 1.05fr minmax(140px,.85fr);gap:64px 22px;align-items:center}
+    .ag-side{grid-row:1}
+    .ag-rag{grid-column:2}
+    .ag-tools{grid-column:3}
+    .ag-trigger{grid-row:2;grid-column:1}
+    .ag-core{grid-row:2;grid-column:2/4;border:1px solid rgba(203,58,27,.38);border-radius:14px;background:var(--hot-wash);
+      box-shadow:0 0 0 5px rgba(203,58,27,.05),var(--shadow);padding:18px 20px 20px}
+    .ag-write{grid-row:2;grid-column:4}
+    .ag-core-h{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:14px}
+    .ag-core-h .nk{font:600 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--hot)}
+    .ag-core-h b{font:400 20px var(--serif);color:var(--hot)}
+    .ag-steps{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr;align-items:center}
+    .ag-step{background:rgba(255,255,255,.72);border:1px solid rgba(203,58,27,.2);border-radius:8px;padding:11px 6px;text-align:center}
+    .ag-step b{display:block;font:400 14.5px var(--serif);color:var(--ink)}
+    .ag-step span{display:block;font:9.5px var(--mono);letter-spacing:.08em;color:var(--faint);margin-top:3px}
+    .ag-arrow{position:relative;height:1px;background:rgba(203,58,27,.32)}
+    .ag-arrow:after{content:"";position:absolute;right:0;top:50%;width:0;height:0;transform:translateY(-50%);
+      border-left:4px solid rgba(203,58,27,.55);border-top:3px solid transparent;border-bottom:3px solid transparent}
+    .dg-cap{margin-top:22px;text-align:center;font:11px var(--mono);letter-spacing:.1em;color:var(--faint);position:relative;z-index:2}
+    .dg-cap span{background:var(--paper);padding:3px 12px} /* keeps the loop wire from running through the label */
+    .dg-cap b{color:var(--hot);font-weight:500}
+
+    /* architecture: layered stack with module chips */
+    .arch{display:grid;grid-template-columns:46px 1fr 46px;gap:16px;margin-top:56px;align-items:stretch}
     .arch-rail{display:flex;align-items:center;justify-content:center}
     .arch-rail span{writing-mode:vertical-rl;text-orientation:mixed;font:600 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--faint)}
     .arch-rail.left span{color:var(--hot)}
-    .arch-stack{display:flex;flex-direction:column}
-    .arch-box{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:22px 26px;display:grid;grid-template-columns:52px 1fr;gap:22px;align-items:baseline;box-shadow:var(--shadow);transition:.22s}
-    .arch-box:hover{border-color:#C4C1B6;box-shadow:var(--shadow-lg);transform:translateX(3px)}
-    .arch-box .l{font:600 12px var(--mono);letter-spacing:.06em;color:var(--hot)}
-    .arch-box b{display:block;font:400 19px var(--serif);color:var(--ink);margin-bottom:5px}
-    .arch-box p{margin:0;font:13px/1.5 var(--mono);color:var(--ink-2);letter-spacing:.01em}
-    .arch-link{position:relative;height:22px;margin-left:26px;width:1px;background:var(--rule)}
-    .arch-link:after{content:"";position:absolute;left:50%;top:0;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 3px rgba(203,58,27,.14);animation:travelV 2.6s cubic-bezier(.55,0,.45,1) infinite}
-    .arch-link.d2:after{animation-delay:.5s}
-    .arch-link.d3:after{animation-delay:1s}
-    .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;border-top:1px solid var(--rule)}
-    .cap{padding:28px 28px 4px 0;border-right:1px solid var(--rule)}
-    .cap:last-child{border-right:0}
-    .cap b{display:block;font:700 26px var(--mono);letter-spacing:-.02em;color:var(--ink)}
-    .cap b s{text-decoration:none;color:var(--hot);font-size:.6em}
-    .cap span{display:block;font-size:14px;color:var(--ink-2);margin-top:8px}
-    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:34px}
+    .arch-stack{display:flex;flex-direction:column;gap:30px}
+    .arch-layer{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:20px 24px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+    .arch-layer:hover{border-color:#C4C1B6;box-shadow:var(--shadow-lg)}
+    .al-head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px}
+    .al-head .l{font:600 12px var(--mono);letter-spacing:.06em;color:var(--hot);flex:none}
+    .al-head b{font:400 19px var(--serif);color:var(--ink)}
+    .al-head .al-d{font:11px var(--mono);color:var(--faint);margin-left:auto;text-align:right}
+    .al-mods{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .mod{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--rule-2);border-radius:7px;
+      background:rgba(255,255,255,.6);padding:10px 8px;font:12px var(--mono);color:var(--ink-2);text-align:center;transition:.2s}
+    .mod:hover{border-color:#C4C1B6;color:var(--ink);background:#fff}
+    .mod .lg{width:15px;height:15px;opacity:.85}
+
+    /* capability figures */
+    .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px;border-top:1px solid var(--rule)}
+    .cap{padding:34px 46px 10px 0;border-right:1px solid var(--rule)}
+    .cap+.cap{padding-left:46px}
+    .cap:last-child{border-right:0;padding-right:0}
+    .cap b{display:block;font:700 30px var(--mono);letter-spacing:-.02em;color:var(--ink)}
+    .cap b s{text-decoration:none;color:var(--hot);font-size:.55em;margin-left:3px}
+    .cap span{display:block;font-size:14px;line-height:1.75;color:var(--ink-2);margin-top:16px;max-width:24em}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:40px}
     .chips span{font:11px var(--mono);letter-spacing:.08em;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:7px 14px;background:rgba(255,255,255,.5)}
 
     /* ---- results table ---- */
@@ -343,10 +379,11 @@
       .p-main{grid-template-columns:1fr;gap:6px}.p-chart{height:80px}
       .acc-in{grid-template-columns:1fr;gap:22px}
       .acc-head{gap:12px}.acc-head .t{width:auto}
-      .flow-row{grid-template-columns:1fr;justify-items:stretch}
-      .flow-row .conn{width:1px;height:38px;justify-self:center;background:var(--rule)}
-      .flow-row .conn:after{animation-name:travelV;left:50%;margin-left:-2.5px;top:0}
-      .flow-caps{flex-direction:column;gap:12px}
+      .ag-grid{grid-template-columns:1fr;gap:44px}
+      .ag-side,.ag-rag,.ag-tools,.ag-trigger,.ag-core,.ag-write{grid-column:1;grid-row:auto}
+      /* stacked, the diagram should still read 触发 → 核心 → 上下文/能力 → 回写 */
+      .ag-trigger{order:1}.ag-core{order:2}.ag-rag{order:3}.ag-tools{order:4}.ag-write{order:5}
+      .al-mods{grid-template-columns:repeat(2,1fr)}
       .steps{grid-template-columns:1fr}
       .step-conn{height:34px;justify-content:center}
       .step-conn .conn{width:1px;height:100%}
@@ -369,6 +406,7 @@
     @media(prefers-reduced-motion:reduce){
       *{animation:none!important;scroll-behavior:auto}
       .rv{opacity:1;transform:none;transition:none}
+      .dg-wires .pulse{display:none}
       .hero .kicker,.hero .word,.hero-copy .lead,.hero-cta,.hero-note,.hero-visual{opacity:1;transform:none}
       .hero h1 em:after{transform:scaleX(1)}
       .ticks i{transition:none;transform:scaleY(1)}
@@ -434,8 +472,8 @@
   <div class="eco"><div class="wrap eco-in">
     <span class="k" data-zh="构建于开放技术栈" data-en="Built on an open stack">构建于开放技术栈</span>
     <div class="marquee"><div class="mq-track">
-      <ul><li>Kubernetes</li><li>YuniKorn</li><li>vLLM</li><li>SGLang</li><li>Ray</li><li>Prometheus</li><li>CUDA</li><li>CANN</li></ul>
-      <ul aria-hidden="true"><li>Kubernetes</li><li>YuniKorn</li><li>vLLM</li><li>SGLang</li><li>Ray</li><li>Prometheus</li><li>CUDA</li><li>CANN</li></ul>
+      <ul><li><i class="lg lg-kubernetes"></i>Kubernetes</li><li><i class="lg lg-yunikorn"></i>YuniKorn</li><li><i class="lg lg-vllm"></i>vLLM</li><li><i class="lg lg-sglang"></i>SGLang</li><li><i class="lg lg-ray"></i>Ray</li><li><i class="lg lg-prometheus"></i>Prometheus</li><li><i class="lg lg-nvidia"></i>CUDA</li><li><i class="lg lg-huawei"></i>CANN</li></ul>
+      <ul aria-hidden="true"><li><i class="lg lg-kubernetes"></i>Kubernetes</li><li><i class="lg lg-yunikorn"></i>YuniKorn</li><li><i class="lg lg-vllm"></i>vLLM</li><li><i class="lg lg-sglang"></i>SGLang</li><li><i class="lg lg-ray"></i>Ray</li><li><i class="lg lg-prometheus"></i>Prometheus</li><li><i class="lg lg-nvidia"></i>CUDA</li><li><i class="lg lg-huawei"></i>CANN</li></ul>
     </div></div>
   </div></div>
 
@@ -459,6 +497,7 @@
         <h3 class="serif" data-zh="算力调度与利用率提升" data-en="Scheduling & utilization">算力调度与利用率提升</h3>
         <p data-zh="把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。" data-en="Turn fragmented compute into an operable pool, running training, batch and online inference on one cluster.">把分散算力治理为可运营的资源池，让训练、批量推理与在线推理同集群高效运行。</p>
         <ul><li>SLA-aware scheduling</li><li>Multi-tenant governance</li><li>Elastic reclaim &amp; backfill</li></ul>
+        <div class="card-tech"><span class="ct-l" data-zh="技术栈" data-en="Stack">技术栈</span><span class="ct-i"><i class="lg lg-yunikorn"></i>YuniKorn</span><span class="ct-i"><i class="lg lg-kubernetes"></i>Kubernetes</span><span class="ct-i"><i class="lg lg-prometheus"></i>Prometheus</span></div>
         <a class="link" href="#technology" data-zh="了解调度层 <span class='a'>→</span>" data-en="Explore the scheduler <span class='a'>→</span>">了解调度层 <span class="a">→</span></a>
       </div>
       <div class="card rv">
@@ -466,6 +505,7 @@
         <h3 class="serif" data-zh="大模型推理部署与优化" data-en="LLM inference optimization">大模型推理部署与优化</h3>
         <p data-zh="基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。" data-en="On vLLM / SGLang, converging unit cost and tail latency for large-scale MoE and multi-GPU deployments.">基于 vLLM / SGLang，为大规模 MoE 与多卡部署收敛单位成本和尾延迟。</p>
         <ul><li>Engine &amp; kernel tuning</li><li>Multi-GPU topology</li><li>Token economics</li></ul>
+        <div class="card-tech"><span class="ct-l" data-zh="技术栈" data-en="Stack">技术栈</span><span class="ct-i"><i class="lg lg-vllm"></i>vLLM</span><span class="ct-i"><i class="lg lg-sglang"></i>SGLang</span><span class="ct-i"><i class="lg lg-nvidia"></i>CUDA</span></div>
         <a class="link" href="#results" data-zh="查看实测结果 <span class='a'>→</span>" data-en="See measured results <span class='a'>→</span>">查看实测结果 <span class="a">→</span></a>
       </div>
       <div class="card rv">
@@ -473,6 +513,7 @@
         <h3 class="serif" data-zh="企业 AI 平台（私有化）" data-en="Enterprise AI platform">企业 AI 平台（私有化）</h3>
         <p data-zh="面向政企与制造业，交付离线、信创兼容、可治理的私有化大模型平台底座。" data-en="A private, air-gapped, domestic-stack-compatible LLM platform foundation for enterprise, public sector and manufacturing.">面向政企与制造业，交付离线、信创兼容、可治理的私有化大模型平台底座。</p>
         <ul><li>Air-gapped deployment</li><li>Domestic-stack ready</li><li>Access &amp; audit governance</li></ul>
+        <div class="card-tech"><span class="ct-l" data-zh="技术栈" data-en="Stack">技术栈</span><span class="ct-i"><i class="lg lg-kubernetes"></i>Kubernetes</span><span class="ct-i"><i class="lg lg-huawei"></i>CANN</span><span class="ct-i"><i class="lg lg-nvidia"></i>CUDA</span></div>
         <a class="link" href="#customers" data-zh="适用场景 <span class='a'>→</span>" data-en="Where it fits <span class='a'>→</span>">适用场景 <span class="a">→</span></a>
       </div>
       <div class="card rv">
@@ -480,6 +521,7 @@
         <h3 class="serif" data-zh="AI 智能体与业务落地" data-en="AI agents & automation">AI 智能体与业务落地</h3>
         <p data-zh="把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。" data-en="Connect LLMs to real business processes — domain agents for manufacturing and enterprise: knowledge Q&A, document workflows, process automation and system integration.">把大模型接入真实业务流程，交付面向制造与政企场景的业务智能体：知识问答、文档处理、流程自动化与系统集成。</p>
         <ul><li>RAG &amp; knowledge base</li><li>Workflow &amp; tool orchestration</li><li>Enterprise system integration</li></ul>
+        <div class="card-tech"><span class="ct-l" data-zh="技术栈" data-en="Stack">技术栈</span><span class="ct-i"><i class="lg lg-vllm"></i>vLLM</span><span class="ct-i"><i class="lg lg-ray"></i>Ray</span></div>
         <a class="link" href="#agent" data-zh="智能体如何运行 <span class='a'>→</span>" data-en="How agents run <span class='a'>→</span>">智能体如何运行 <span class="a">→</span></a>
       </div>
     </div>
@@ -581,20 +623,31 @@
       <h2 data-zh="让大模型，真正在业务里干活。" data-en="Put the model to work inside the business.">让大模型，真正在业务里干活。</h2>
       <p class="lead" data-zh="不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。" data-en="Not another chatbox — business agents wired into knowledge bases, tools and enterprise systems for real manufacturing and public-sector workflows; private and auditable.">不是又一个对话框，而是接入知识库、工具与企业系统的业务智能体——面向制造与政企的真实流程，可私有化、可审计。</p>
     </div>
-    <div class="flow rv">
-      <div class="flow-caps">
-        <div class="node"><span class="nk" data-zh="上下文" data-en="Context">上下文</span><b class="serif" data-zh="知识库 · RAG" data-en="Knowledge · RAG">知识库 · RAG</b><span class="nd" data-zh="检索企业知识" data-en="Retrieve knowledge">检索企业知识</span></div>
-        <div class="node"><span class="nk" data-zh="能力" data-en="Actions">能力</span><b class="serif" data-zh="工具 · 企业系统" data-en="Tools · Systems">工具 · 企业系统</b><span class="nd" data-zh="调用与写入" data-en="Call & write">调用与写入</span></div>
+    <div class="dg rv" id="agentDg" data-wires='[
+      {"f":"agTrigger","fs":"r","t":"agCore","ts":"l","delay":0},
+      {"f":"agCore","fs":"r","t":"agWrite","ts":"l","delay":0.5},
+      {"f":"agRag","fs":"b","t":"agCore","ts":"t","tf":0.28,"dual":true,"delay":1},
+      {"f":"agTools","fs":"b","t":"agCore","ts":"t","tf":0.72,"dual":true,"delay":1.5},
+      {"f":"agWrite","fs":"b","t":"agTrigger","ts":"b","k":92,"dash":true,"delay":0.9}
+    ]'>
+      <svg class="dg-wires" aria-hidden="true"></svg>
+      <div class="dg-layer ag-grid">
+        <div class="node ag-side ag-rag" id="agRag"><span class="nk" data-zh="上下文" data-en="Context">上下文</span><b class="serif" data-zh="知识库 · RAG" data-en="Knowledge · RAG">知识库 · RAG</b><span class="nd" data-zh="检索企业知识" data-en="Retrieve knowledge">检索企业知识</span></div>
+        <div class="node ag-side ag-tools" id="agTools"><span class="nk" data-zh="能力" data-en="Actions">能力</span><b class="serif" data-zh="工具 · 企业系统" data-en="Tools · Systems">工具 · 企业系统</b><span class="nd" data-zh="调用与写入" data-en="Call & write">调用与写入</span></div>
+        <div class="node ag-trigger" id="agTrigger"><span class="nk">01</span><b class="serif" data-zh="业务触发" data-en="Trigger">业务触发</b><span class="nd" data-zh="用户 / 系统 / 事件" data-en="User / system / event">用户 / 系统 / 事件</span></div>
+        <div class="ag-core" id="agCore">
+          <div class="ag-core-h"><span class="nk" data-zh="核心" data-en="Core">核心</span><b class="serif" data-zh="Agent 运行时" data-en="Agent runtime">Agent 运行时</b></div>
+          <div class="ag-steps">
+            <div class="ag-step"><b class="serif" data-zh="规划" data-en="Plan">规划</b><span data-zh="拆解任务" data-en="Decompose">拆解任务</span></div>
+            <span class="ag-arrow" aria-hidden="true"></span>
+            <div class="ag-step"><b class="serif" data-zh="推理" data-en="Reason">推理</b><span data-zh="大模型决策" data-en="LLM decides">大模型决策</span></div>
+            <span class="ag-arrow" aria-hidden="true"></span>
+            <div class="ag-step"><b class="serif" data-zh="执行" data-en="Act">执行</b><span data-zh="调用工具" data-en="Call tools">调用工具</span></div>
+          </div>
+        </div>
+        <div class="node ag-write" id="agWrite"><span class="nk">02</span><b class="serif" data-zh="回写业务" data-en="Write back">回写业务</b><span class="nd" data-zh="结果落系统 · 可审计" data-en="Into systems · auditable">结果落系统 · 可审计</span></div>
       </div>
-      <div class="conn-v up" aria-hidden="true"></div>
-      <div class="flow-row">
-        <div class="node"><span class="nk">01</span><b class="serif" data-zh="业务触发" data-en="Trigger">业务触发</b><span class="nd" data-zh="用户 / 系统 / 事件" data-en="User / system / event">用户 / 系统 / 事件</span></div>
-        <div class="conn" aria-hidden="true"></div>
-        <div class="node hub"><span class="nk" data-zh="核心" data-en="Core">核心</span><b class="serif" data-zh="Agent 编排" data-en="Agent core">Agent 编排</b><span class="nd" data-zh="大模型 · 规划 · 推理 · 决策" data-en="LLM · plan · reason · decide">大模型 · 规划 · 推理 · 决策</span></div>
-        <div class="conn d2" aria-hidden="true"></div>
-        <div class="node"><span class="nk">02</span><b class="serif" data-zh="回写业务" data-en="Write back">回写业务</b><span class="nd" data-zh="结果落系统 · 可审计" data-en="Into systems · auditable">结果落系统 · 可审计</span></div>
-      </div>
-      <div class="flow-loop"><span data-zh="闭环 · 结果回流，持续自动化" data-en="Closed loop · results feed back, continuous automation">闭环 · 结果回流，持续自动化</span></div>
+      <div class="dg-cap"><span data-zh="虚线 · 结果回流，持续自动化闭环" data-en="Dashed · results feed back into the next run">虚线 · 结果回流，持续自动化闭环</span></div>
     </div>
   </div></section>
 
@@ -606,17 +659,56 @@
       <p class="lead" data-zh="从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿这四层。" data-en="From inference request to allocation, execution, observability and continuous optimization — across all four layers.">从推理请求进入，到资源分配、执行、观测与持续优化，完整贯穿这四层。</p>
     </div>
     <div class="arch rv">
-      <div class="arch-rail left"><span data-zh="推理请求 ↓ 逐层下发" data-en="Request ↓ flows down">推理请求 ↓ 逐层下发</span></div>
-      <div class="arch-stack">
-        <div class="arch-box"><span class="l">L04</span><div><b class="serif" data-zh="业务与治理" data-en="Business & governance">业务与治理</b><p data-zh="企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付" data-en="Platforms · agents · access · audit · private delivery">企业 AI 平台 · 智能体 · 权限 · 审计 · 私有化交付</p></div></div>
-        <div class="arch-link" aria-hidden="true"></div>
-        <div class="arch-box"><span class="l">L03</span><div><b class="serif" data-zh="推理服务" data-en="Inference serving">推理服务</b><p>vLLM · SGLang · MoE · KV Cache · Tail Latency</p></div></div>
-        <div class="arch-link d2" aria-hidden="true"></div>
-        <div class="arch-box"><span class="l">L02</span><div><b class="serif" data-zh="集群调度" data-en="Cluster scheduling">集群调度</b><p>YuniKorn · Kubernetes · Mixed Workloads · SLA</p></div></div>
-        <div class="arch-link d3" aria-hidden="true"></div>
-        <div class="arch-box"><span class="l">L01</span><div><b class="serif" data-zh="异构算力" data-en="Heterogeneous compute">异构算力</b><p data-zh="国际主流与国产算力双栈适配 · 覆盖异构部署" data-en="Dual-stack across mainstream global and domestic accelerators">国际主流与国产算力双栈适配 · 覆盖异构部署</p></div></div>
+      <div class="arch-rail left"><span data-zh="推理请求 · 逐层下发" data-en="Request · flows down">推理请求 · 逐层下发</span></div>
+      <div class="dg arch-stack-wrap" id="archDg" style="margin-top:0" data-wires='[
+        {"f":"L04","fs":"b","ff":0.08,"t":"L03","ts":"t","tf":0.08,"delay":0},
+        {"f":"L03","fs":"b","ff":0.08,"t":"L02","ts":"t","tf":0.08,"delay":0.35},
+        {"f":"L02","fs":"b","ff":0.08,"t":"L01","ts":"t","tf":0.08,"delay":0.7},
+        {"f":"L01","fs":"t","ff":0.92,"t":"L02","ts":"b","tf":0.92,"delay":0.2},
+        {"f":"L02","fs":"t","ff":0.92,"t":"L03","ts":"b","tf":0.92,"delay":0.55},
+        {"f":"L03","fs":"t","ff":0.92,"t":"L04","ts":"b","tf":0.92,"delay":0.9}
+      ]'>
+        <svg class="dg-wires" aria-hidden="true"></svg>
+        <div class="dg-layer arch-stack">
+          <div class="arch-layer" id="L04">
+            <div class="al-head"><span class="l">L04</span><b class="serif" data-zh="业务与治理" data-en="Business & governance">业务与治理</b><span class="al-d" data-zh="面向业务" data-en="Business facing">面向业务</span></div>
+            <div class="al-mods">
+              <span class="mod" data-zh="企业 AI 平台" data-en="AI platform">企业 AI 平台</span>
+              <span class="mod" data-zh="智能体编排" data-en="Agent orchestration">智能体编排</span>
+              <span class="mod" data-zh="权限 · 审计" data-en="Access · audit">权限 · 审计</span>
+              <span class="mod" data-zh="私有化交付" data-en="Private delivery">私有化交付</span>
+            </div>
+          </div>
+          <div class="arch-layer" id="L03">
+            <div class="al-head"><span class="l">L03</span><b class="serif" data-zh="推理服务" data-en="Inference serving">推理服务</b><span class="al-d" data-zh="单位成本 · 尾延迟" data-en="Unit cost · tail latency">单位成本 · 尾延迟</span></div>
+            <div class="al-mods">
+              <span class="mod"><i class="lg lg-vllm"></i>vLLM</span>
+              <span class="mod"><i class="lg lg-sglang"></i>SGLang</span>
+              <span class="mod" data-zh="MoE 并行" data-en="MoE parallelism">MoE 并行</span>
+              <span class="mod">KV Cache</span>
+            </div>
+          </div>
+          <div class="arch-layer" id="L02">
+            <div class="al-head"><span class="l">L02</span><b class="serif" data-zh="集群调度" data-en="Cluster scheduling">集群调度</b><span class="al-d" data-zh="利用率 · SLA" data-en="Utilization · SLA">利用率 · SLA</span></div>
+            <div class="al-mods">
+              <span class="mod"><i class="lg lg-yunikorn"></i>YuniKorn</span>
+              <span class="mod"><i class="lg lg-kubernetes"></i>Kubernetes</span>
+              <span class="mod" data-zh="混合负载" data-en="Mixed workloads">混合负载</span>
+              <span class="mod"><i class="lg lg-prometheus"></i>Prometheus</span>
+            </div>
+          </div>
+          <div class="arch-layer" id="L01">
+            <div class="al-head"><span class="l">L01</span><b class="serif" data-zh="异构算力" data-en="Heterogeneous compute">异构算力</b><span class="al-d" data-zh="双栈适配" data-en="Dual-stack">双栈适配</span></div>
+            <div class="al-mods">
+              <span class="mod"><i class="lg lg-nvidia"></i>CUDA</span>
+              <span class="mod"><i class="lg lg-huawei"></i>CANN</span>
+              <span class="mod" data-zh="异构池化" data-en="Heterogeneous pooling">异构池化</span>
+              <span class="mod" data-zh="拓扑感知" data-en="Topology aware">拓扑感知</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="arch-rail right"><span data-zh="遥测观测 ↑ 持续优化" data-en="Telemetry ↑ loops up">遥测观测 ↑ 持续优化</span></div>
+      <div class="arch-rail right"><span data-zh="遥测观测 · 持续优化" data-en="Telemetry · loops up">遥测观测 · 持续优化</span></div>
     </div>
     <div class="caps rv">
       <div class="cap"><b>4<s>层</s></b><span data-zh="从异构算力到业务治理，同一支团队贯穿到底，不在层与层之间丢失上下文。" data-en="From heterogeneous silicon to business governance — one team across all four layers, no context lost between them.">从异构算力到业务治理，同一支团队贯穿到底，不在层与层之间丢失上下文。</span></div>
@@ -747,6 +839,7 @@
     document.documentElement.lang=current==='zh'?'zh-CN':'en';
     document.querySelectorAll('[data-zh]').forEach(function(el){el.innerHTML=el.dataset[current];});
     btn.textContent=current==='zh'?'EN':'中文';
+    if(window.DG) DG.redraw(); // labels resize -> wires must follow
   });
   // header state
   var hdr=document.getElementById('hdr');
@@ -765,6 +858,56 @@
     if(sibs.length>1){el.style.transitionDelay=(Array.prototype.indexOf.call(sibs,el)*0.08)+'s';}
     rvObs.observe(el);
   });
+  // diagram engine: measure the real DOM boxes, draw SVG wires between them
+  var DG = (function(){
+    var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function anchor(el, box, side, frac){
+      var r = el.getBoundingClientRect(), f = (frac==null?0.5:frac);
+      var x = r.left-box.left, y = r.top-box.top;
+      if(side==='l') return {x:x,            y:y+r.height*f, dx:-1, dy:0};
+      if(side==='r') return {x:x+r.width,    y:y+r.height*f, dx:1,  dy:0};
+      if(side==='t') return {x:x+r.width*f,  y:y,            dx:0,  dy:-1};
+      return             {x:x+r.width*f,  y:y+r.height,   dx:0,  dy:1};
+    }
+    function n(v){ return Math.round(v*10)/10; }
+    function draw(dg){
+      var svg = dg.querySelector('.dg-wires'); if(!svg) return;
+      var specs; try{ specs = JSON.parse(dg.dataset.wires); }catch(e){ return; }
+      var box = dg.getBoundingClientRect();
+      if(!box.width || !box.height) return;
+      svg.setAttribute('viewBox','0 0 '+n(box.width)+' '+n(box.height));
+      var out = '<defs><marker id="dgAh" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'+
+                '<path d="M0.5 0.5 L8.5 4.5 L0.5 8.5 z" fill="#B4B0A4"/></marker></defs>';
+      specs.forEach(function(s,i){
+        var a = document.getElementById(s.f), b = document.getElementById(s.t);
+        if(!a || !b) return;
+        var p1 = anchor(a, box, s.fs, s.ff), p2 = anchor(b, box, s.ts, s.tf);
+        var dist = Math.hypot(p2.x-p1.x, p2.y-p1.y);
+        var k = s.k || Math.max(26, Math.min(105, dist*0.42));
+        var d = 'M'+n(p1.x)+' '+n(p1.y)+' C'+n(p1.x+p1.dx*k)+' '+n(p1.y+p1.dy*k)+' '+
+                n(p2.x+p2.dx*k)+' '+n(p2.y+p2.dy*k)+' '+n(p2.x)+' '+n(p2.y);
+        var id = dg.id+'-w'+i;
+        out += '<path id="'+id+'" class="wire'+(s.dash?' dash':'')+'" d="'+d+'" marker-end="url(#dgAh)"'+
+               (s.dual?' marker-start="url(#dgAh)"':'')+'/>';
+        if(!reduce) out += '<circle class="pulse" r="3.2"><animateMotion dur="3s" begin="'+(s.delay||0)+
+               's" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.5 0 0.5 1">'+
+               '<mpath href="#'+id+'" xlink:href="#'+id+'"/></animateMotion></circle>';
+      });
+      svg.innerHTML = out;
+    }
+    function all(){ document.querySelectorAll('.dg[data-wires]').forEach(draw); }
+    var t; function schedule(){ clearTimeout(t); t = setTimeout(all, 90); }
+    addEventListener('load', all);
+    addEventListener('resize', schedule, {passive:true});
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+    if(window.ResizeObserver){
+      var ro = new ResizeObserver(schedule);
+      document.querySelectorAll('.dg[data-wires]').forEach(function(d){ ro.observe(d); });
+    }
+    all();
+    return {redraw: all};
+  })();
+
   // customers accordion
   document.querySelectorAll('.acc-item').forEach(function(item){
     var head=item.querySelector('.acc-head');
