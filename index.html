@@ -104,14 +104,18 @@
     .hero-copy .lead{margin-top:24px;opacity:0;animation:fadeUp .8s .5s forwards}
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;opacity:0;animation:fadeUp .8s .62s forwards}
     /* hero stats — the product advantage; sized to be read, not skimmed past */
-    .hero-note{display:flex;flex-wrap:wrap;gap:16px 34px;margin-top:34px;opacity:0;animation:fadeUp .8s .74s forwards}
+    .hero-note{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 30px;margin-top:34px;opacity:0;animation:fadeUp .8s .74s forwards}
     .hstat b{display:block;font:700 clamp(22px,2.4vw,34px)/1 var(--mono);letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
     .hstat b s{text-decoration:none;font-size:.56em;color:var(--hot);margin-left:1px}
     .hstat b .h{color:var(--hot);font-weight:400;font-size:.7em;margin:0 3px}
     .hstat .hl{display:block;font:10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:10px;white-space:nowrap}
     /* keeps the figure labelled as derived, not measured. max-width so the long EN
        string wraps instead of stretching the flex item and breaking the row. */
-    .hstat .hd{display:block;font:10px/1.5 var(--mono);font-style:normal;color:var(--faint);opacity:.7;margin-top:5px;max-width:14em}
+    .hstat .hd{display:block;font:10px/1.5 var(--mono);font-style:normal;color:var(--faint);opacity:.7;margin-top:5px;max-width:15em}
+    /* the derived figure is a different KIND of number from the measured two —
+       the rule stops the row reading as "40→72% and 6h→20min therefore +80%",
+       which would imply queue time feeds the token estimate. It doesn't. */
+    .hstat.key{padding-left:30px;border-left:1px solid var(--rule)}
     .hstat.key b{color:var(--hot)}
     .hstat.key .hl{color:var(--ink-2)}
     .hero-visual{opacity:0;animation:fadeUp .9s .55s forwards;width:100%;max-width:540px;justify-self:end}
@@ -419,6 +423,14 @@
     .foot-b{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid var(--rule);color:var(--faint);font:11px var(--mono);letter-spacing:.04em}
 
     /* ---- responsive ---- */
+    /* two-column hero squeezes .hero-copy to ~420px here; tighten the stat row
+       so the derived stat can't wrap onto its own line (its left rule would
+       then float free of anything). */
+    @media(max-width:1120px) and (min-width:901px){
+      .hero-note{gap:14px 20px}
+      .hstat.key{padding-left:20px}
+      .hstat .hd{max-width:11em}
+    }
     @media(max-width:980px){
       .cards{grid-template-columns:1fr}
       .stats{grid-template-columns:repeat(2,1fr)}
@@ -519,7 +531,7 @@
           <div class="hstat key">
             <b>≈ +80<s>%</s></b>
             <span class="hl" data-zh="Token 产出" data-en="Token output">Token 产出</span>
-            <i class="hd" data-zh="同样的卡 · 按利用率推算" data-en="Same cards · derived">同样的卡 · 按利用率推算</i>
+            <i class="hd" data-zh="同样的卡 · 由利用率推算" data-en="Same cards · derived from utilization">同样的卡 · 由利用率推算</i>
           </div>
         </div>
       </div>
