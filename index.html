@@ -103,20 +103,20 @@
     .hero .word{display:inline-block;opacity:0;transform:translateY(20px);animation:fadeUp .9s forwards}
     .hero-copy .lead{margin-top:24px;opacity:0;animation:fadeUp .8s .5s forwards}
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;opacity:0;animation:fadeUp .8s .62s forwards}
-    /* Hero stats. The token figure leads and the measured ones support it —
-       a row of equal-weight numbers read left-to-right makes the last one look
-       like a total, which would falsely imply queue time feeds the estimate. */
-    .hero-note{margin-top:32px;opacity:0;animation:fadeUp .8s .74s forwards}
-    .hkey{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 16px}
-    .hkey .hl{font:14px var(--mono);letter-spacing:.04em;color:var(--ink-2)}
-    .hkey b{font:700 clamp(30px,3.6vw,50px)/1 var(--mono);letter-spacing:-.03em;color:var(--hot);white-space:nowrap}
-    .hkey b s{text-decoration:none;font-size:.5em;margin-left:1px}
-    .hero-note .hd{display:block;font:12px/1.6 var(--mono);font-style:normal;color:var(--faint);margin-top:8px}
-    .hproof{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:16px;padding-top:15px;border-top:1px solid var(--rule)}
-    .hproof div{display:flex;align-items:baseline;gap:9px;font:13px var(--mono);color:var(--ink-2);white-space:nowrap}
-    .hproof .m{font:10px var(--mono);letter-spacing:.14em;color:var(--faint)} /* 实测 — marks these as measured, unlike the figure above */
-    .hproof b{font-weight:600;color:var(--ink)}
-    .hproof .h{color:var(--hot)}
+    /* Hero figures. Spans both hero columns so all three numbers get the full
+       1180px — inside the 560px copy column they could only ever be small.
+       Claim (derived) sits left of a rule, measured proof to its right: a plain
+       equal-weight row reads left-to-right as if the last number were a total. */
+    .hero-figures{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-start;
+      gap:26px 44px;padding-top:34px;border-top:1px solid var(--rule);
+      opacity:0;animation:fadeUp .8s .86s forwards}
+    .hfig b{display:block;font:700 clamp(30px,3.4vw,46px)/1 var(--mono);letter-spacing:-.03em;color:var(--ink);white-space:nowrap}
+    .hfig b s{text-decoration:none;font-size:.5em;color:var(--hot);margin-left:1px}
+    .hfig b .h{color:var(--hot);font-weight:400;font-size:.66em;margin:0 4px}
+    .hfig .fl{display:block;font:14px var(--mono);letter-spacing:.03em;color:var(--ink-2);margin-top:14px;white-space:nowrap}
+    .hfig .fd{display:block;font:12px/1.6 var(--mono);font-style:normal;color:var(--faint);margin-top:7px}
+    .hfig.key b{color:var(--hot)}
+    .hproof{display:flex;flex-wrap:wrap;gap:26px 44px;padding-left:44px;border-left:1px solid var(--rule)}
     .hero-visual{opacity:0;animation:fadeUp .9s .55s forwards;width:100%;max-width:540px;justify-self:end}
     @keyframes fadeUp{to{opacity:1;transform:none}}
 
@@ -434,6 +434,8 @@
       .navmid{display:none}
       .hero{padding:126px 0 72px}
       .hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{max-width:none}
+      /* stacked, a left rule would sit under the claim rather than beside it */
+      .hproof{width:100%;padding-left:0;border-left:0;padding-top:26px;border-top:1px solid var(--rule)}
       .res,.team-grid,.cta-row{grid-template-columns:1fr}
       .res{gap:36px}
       .foot{grid-template-columns:1fr 1fr}.foot .brand{grid-column:1/-1}
@@ -473,7 +475,7 @@
       *{animation:none!important;scroll-behavior:auto}
       .rv{opacity:1;transform:none;transition:none}
       .dg-wires .pulse{display:none}
-      .hero .kicker,.hero .word,.hero-copy .lead,.hero-cta,.hero-note,.hero-visual{opacity:1;transform:none}
+      .hero .kicker,.hero .word,.hero-copy .lead,.hero-cta,.hero-figures,.hero-visual{opacity:1;transform:none}
       .hero h1 em:after{transform:scaleX(1)}
       .ticks i{transition:none;transform:scaleY(1)}
       .conn:after,.conn-v:after,.arch-link:after{display:none}
@@ -510,25 +512,6 @@
           <a class="btn btn-p" href="#contact" data-zh="预约效率诊断 <span class='a'>→</span>" data-en="Book an assessment <span class='a'>→</span>">预约效率诊断 <span class="a">→</span></a>
           <a class="btn btn-s" href="#technology" data-zh="查看技术架构" data-en="See the architecture">查看技术架构</a>
         </div>
-        <div class="hero-note">
-          <div class="hkey">
-            <b>≈ +80<s>%</s></b>
-            <span class="hl" data-zh="Token 产出 · 同样的卡" data-en="Token output · same cards">Token 产出 · 同样的卡</span>
-          </div>
-          <i class="hd" data-zh="由集群利用率 40 → 72% 推算得出" data-en="Derived from the 40 → 72% utilization gain">由集群利用率 40 → 72% 推算得出</i>
-          <div class="hproof">
-            <div>
-              <span class="m" data-zh="实测" data-en="Measured">实测</span>
-              <span data-zh="集群利用率" data-en="Utilization">集群利用率</span>
-              <b>40 <span class="h">→</span> 72%</b>
-            </div>
-            <div>
-              <span class="m" data-zh="实测" data-en="Measured">实测</span>
-              <span data-zh="作业排队" data-en="Job queue">作业排队</span>
-              <b>6h <span class="h">→</span> 20min</b>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="hero-visual">
         <div class="panel">
@@ -544,6 +527,24 @@
           </div>
           <div class="p-nodes"><span class="p-l" data-zh="GPU ×48 · 实时占用" data-en="GPU ×48 · live">GPU ×48 · 实时占用</span><div class="ticks" id="ticks"></div></div>
           <div class="p-tiles"><div><b id="pT">72%</b><span>UTIL</span></div><div><b>20m</b><span>QUEUE</span></div><div><b>99.9%</b><span>SLA</span></div></div>
+        </div>
+      </div>
+
+      <div class="hero-figures">
+        <div class="hfig key">
+          <b>≈ +80<s>%</s></b>
+          <span class="fl" data-zh="Token 产出 · 同样的卡" data-en="Token output · same cards">Token 产出 · 同样的卡</span>
+          <i class="fd" data-zh="由集群利用率 40 → 72% 推算得出" data-en="Derived from the 40 → 72% utilization gain">由集群利用率 40 → 72% 推算得出</i>
+        </div>
+        <div class="hproof">
+          <div class="hfig">
+            <b>40 <span class="h">→</span> 72<s>%</s></b>
+            <span class="fl" data-zh="集群利用率 · 实测" data-en="Utilization · measured">集群利用率 · 实测</span>
+          </div>
+          <div class="hfig">
+            <b>6h <span class="h">→</span> 20<s>min</s></b>
+            <span class="fl" data-zh="作业排队 · 实测" data-en="Job queue · measured">作业排队 · 实测</span>
+          </div>
         </div>
       </div>
     </div>
