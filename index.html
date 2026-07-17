@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#EDECE8">
   <title>深言速舟｜AI 基础设施工程</title>
-  <meta name="description" content="深言速舟专注 GPU 集群调度、大模型推理优化、企业 AI 平台与智能体交付，把每一张卡变成可计价的产能。">
+  <meta name="description" content="深言速舟专注 GPU 集群调度与大模型推理优化：让同一批卡产出更多 token。集群利用率 40%→72%，把每一张卡变成可最大化的 Token 产能。">
   <link rel="icon" href="assets/shenyan-logo.png">
   <style>
     :root{
@@ -97,7 +97,7 @@
     .hero-copy{max-width:560px}
     .hero h1{font-size:clamp(40px,6.1vw,80px);line-height:1.04;letter-spacing:-.02em;margin:24px 0 0;max-width:16em}
     .hero h1 em{font-style:italic;position:relative;display:inline-block}
-    .hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:-.09em;height:2px;background:var(--hot);transform:scaleX(0);transform-origin:left;animation:swipe .7s 1.05s cubic-bezier(.16,1,.3,1) forwards}
+    .hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:-.09em;height:2px;background:var(--hot);transform:scaleX(0);transform-origin:left;animation:swipe .7s 1.2s cubic-bezier(.16,1,.3,1) forwards}
     @keyframes swipe{to{transform:scaleX(1)}}
     .hero .kicker{opacity:0;animation:fadeUp .8s .05s forwards}
     .hero .word{display:inline-block;opacity:0;transform:translateY(20px);animation:fadeUp .9s forwards}
@@ -106,6 +106,7 @@
     .hero-note{margin-top:20px;font:12px/1.9 var(--mono);color:var(--faint);opacity:0;animation:fadeUp .8s .74s forwards}
     .hero-note b{color:var(--ink);font-weight:500}
     .hero-note .h{color:var(--hot)}
+    .hero-note .drv{font-style:normal;opacity:.72} /* marks the figure as derived, not measured */
     .hero-visual{opacity:0;animation:fadeUp .9s .55s forwards;width:100%;max-width:540px;justify-self:end}
     @keyframes fadeUp{to{opacity:1;transform:none}}
 
@@ -493,7 +494,7 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="kicker" data-zh="AI 基础设施工程" data-en="AI Infrastructure Engineering">AI 基础设施工程</span>
-        <h1><span class="word" style="animation-delay:.12s" data-zh="把每一张卡，" data-en="Turn every GPU">把每一张卡，</span><br><span class="word" style="animation-delay:.26s" data-zh="变成<em>可计价</em>的产能。" data-en="into <em>billable</em> capacity.">变成<em>可计价</em>的产能。</span></h1>
+        <h1><span class="word" style="animation-delay:.12s" data-zh="把每一张卡，" data-en="Turn every GPU">把每一张卡，</span><br><span class="word" style="animation-delay:.26s" data-zh="变成可最大化的" data-en="into maximized">变成可最大化的</span><br><span class="word" style="animation-delay:.4s" data-zh="<em>Token</em> 产能。" data-en="<em>token</em> output."><em>Token</em> 产能。</span></h1>
         <p class="lead" data-zh="我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。" data-en="We engineer the layer between inference engines and cluster schedulers — turning compute into an operable resource. We don't resell compute; we release efficiency.">我们在推理引擎与集群调度之间，构建真正可运营的 AI 基础设施。不卖算力，只释放效率。</p>
         <div class="hero-cta">
           <a class="btn btn-p" href="#contact" data-zh="预约效率诊断 <span class='a'>→</span>" data-en="Book an assessment <span class='a'>→</span>">预约效率诊断 <span class="a">→</span></a>
@@ -501,7 +502,9 @@
         </div>
         <div class="hero-note">
           <span data-zh="集群利用率" data-en="Utilization">集群利用率</span> <b>40 <span class="h">→</span> 72%</b> &nbsp;·&nbsp;
-          <span data-zh="作业排队" data-en="Queue">作业排队</span> <b>6h <span class="h">→</span> 20min</b>
+          <span data-zh="作业排队" data-en="Queue">作业排队</span> <b>6h <span class="h">→</span> 20min</b><br>
+          <span data-zh="同样的卡，Token 产出" data-en="Same cards, token output">同样的卡，Token 产出</span> <b class="h">≈ +80%</b>
+          <i class="drv" data-zh="（按利用率推算）" data-en="(derived from utilization)">（按利用率推算）</i>
         </div>
       </div>
       <div class="hero-visual">
